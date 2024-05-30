@@ -4,7 +4,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the repository
-                git clone 'https://github.com/EduardUsatchev/DevOps.git'
+                sh 'git clone https://github.com/EduardUsatchev/DevOps.git'
             }
         }
 
