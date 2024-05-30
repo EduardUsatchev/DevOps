@@ -12,7 +12,7 @@ pipeline {
             steps {
                 // Build the Docker image
                 sh 'cd docker/dockerBuild-01/'
-                sh 'docker build -t app .'
+                sh 'docker build -f docker/dockerBuild-01/Dockerfile -t app .'
             }
         }
 
