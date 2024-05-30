@@ -11,7 +11,8 @@ pipeline {
         stage('Build') {
             steps {
                 // Build the Docker image
-                sh 'docker build -t docker/dockerBuild-01/Dockerfile .'
+                sh 'cd docker/dockerBuild-01/'
+                sh 'docker build -t app .'
             }
         }
 
