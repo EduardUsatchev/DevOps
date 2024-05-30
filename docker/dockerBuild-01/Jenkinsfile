@@ -1,11 +1,10 @@
 pipeline {
     agent any
-
     stages {
         stage('Checkout') {
             steps {
                 // Checkout the repository
-                git 'https://github.com/EduardUsatchev/DevOps.git'
+                git clone 'https://github.com/EduardUsatchev/DevOps.git'
             }
         }
 
