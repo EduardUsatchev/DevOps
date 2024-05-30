@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the repository
+                git 'https://github.com/EduardUsatchev/DevOps.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Build the Docker image
+                sh 'docker build -t docker/dockerBuild-01/Dockerfile .'
+            }
+        }
+
+        stage('Run') {
+            steps {
+                // Run the Docker container
+                sh 'docker run -d  --name app app'
+            }
+        }
+
+
+        stage('Finalize') {
+            steps {
+                // Terminate the Docker container
+                sh 'docker stop app'
+                sh 'docker rm app'
+
+                // Tag and push the Docker image to DockerHub
+               sh 'docker tag app eduardusatchev/app:latest'
+               sh 'docker push eduardusatchev/app:latest'
+
+            }
+        }
+    }
+}
