@@ -1,6 +1,6 @@
 FROM python:3-alpine
-COPY app.py /app
+COPY docker/dockerBuild-01/app.py /app
 WORKDIR /app
 RUN apt install ping net-tools
 
-CMD ["python","app.py"]
+CMD ["python","docker/dockerBuild-01/app.py"]
