@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: resource-hog
+  namespace: devops-lab
+spec:
+  containers:
+  - name: resource-hog
+    image: nginx
+    resources:
+      requests:
+        cpu: "2"  # Request more than the quota allows
+        memory: "2Gi"  # Request more than the quota allows
+      limits:
+        cpu: "2"
+        memory: "3Gi"
