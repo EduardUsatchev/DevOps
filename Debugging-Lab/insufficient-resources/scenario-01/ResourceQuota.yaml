@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: devops-lab-quota
+  namespace: devops-lab
+spec:
+  hard:
+    requests.cpu: "1"  # Total CPU request limit
+    requests.memory: "1Gi"  # Total memory request limit
+    limits.cpu: "2"  # Total CPU limit
+    limits.memory: "2Gi"  # Total memory limit
