@@ -1,14 +1,11 @@
+---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: ns-network-policy
-  namespace: prod
+  name: allow-all-ingress
 spec:
   podSelector: {}
+  ingress:
+  - {}
   policyTypes:
   - Ingress
-  ingress:
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          name: dev
