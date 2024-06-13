@@ -8,7 +8,7 @@
     - docker-dependencies
 
 
-# This repository is using encryption for every lab resolution,
-## if you would like to decrypt the folders please run:
+# This repository is using encryption for every lab resolution
+### if you would like to decrypt the folders please run:
     - git-crypt status
     - git-crypt unlock encryption-key/git-crypt-key
