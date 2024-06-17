@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  flask-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+      - "8000:8000"
+      - "8080:8080"
+    volumes:
+      - ./logs:/var/log/my-flask-app
+    environment:
+      FLASK_APP: app.py
+      FLASK_RUN_HOST: 0.0.0.0
+    restart: always
