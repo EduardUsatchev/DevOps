@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  flask-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+      - "8000:8000"
+      - "8080:8080"
+    volumes:
+      - ./logs:/var/log/my-flask-app
+      - ./data:/var/data/my-flask-app
+    env_file:
+      - .env
+    environment:
+      DB_SERVICE_HOST: db
+      DB_SERVICE_PORT: 5432
+      RUN_MIGRATIONS: "true"
+    restart: always
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+    env_file:
+      - .env
