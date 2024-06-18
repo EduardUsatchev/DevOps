@@ -1,5 +1,4 @@
 version: '3.8'
-
 services:
   flask-app:
     build:
@@ -15,3 +14,4 @@ services:
       FLASK_APP: app.py
       FLASK_RUN_HOST: 0.0.0.0
     restart: always
+
