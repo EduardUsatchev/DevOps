@@ -20,3 +20,9 @@ variable "instance_type" {
   type = string
   default = "t2.micro"
 }
+
+variable "tags" {
+  description = "A map of tags to add to all resources"
+  type = map(string)
+  default = {}
+}
