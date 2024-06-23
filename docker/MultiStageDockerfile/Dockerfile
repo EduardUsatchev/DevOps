@@ -1,6 +1,6 @@
 # Stage 1: Build Stage
 # Use a Python base image for building dependencies
-ARG pythonVersion=3.9
+ARG pythonVersion=3.
 FROM python:${pythonVersion}-slim AS build
 
 # Set environment variables
