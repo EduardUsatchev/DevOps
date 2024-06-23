@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  flask_random_number:
+    build:
+      context: ./flask_random_number
+    ports:
+      - "5000:5000"
+
+  fastapi_prime_checker:
+    build:
+      context: ./fastapi_prime_checker
+    ports:
+      - "8000:8000"
+    depends_on:
+      - flask_random_number
