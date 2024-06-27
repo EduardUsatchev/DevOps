@@ -1,0 +1,17 @@
+---
+- name: Deploy application
+  hosts: webservers
+  become: yes
+  tasks:
+    - name: Pull latest code from Git
+      git:
+        repo: 'https://github.com/example/app.git'
+        dest: /var/www/html/app
+    - name: Install dependencies
+      shell: |
+        cd /var/www/html/app
+        npm install
+    - name: Restart application service
+      service:
+        name: app
+        state: restarted

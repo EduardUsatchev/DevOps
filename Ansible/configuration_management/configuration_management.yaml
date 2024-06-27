@@ -1,0 +1,17 @@
+---
+- name: Configure servers
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure NTP is installed
+      apt:
+        name: ntp
+        state: present
+    - name: Configure NTP
+      template:
+        src: templates/ntp.conf.j2
+        dest: /etc/ntp.conf
+    - name: Restart NTP service
+      service:
+        name: ntp
+        state: restarted

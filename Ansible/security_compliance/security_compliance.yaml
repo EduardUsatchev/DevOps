@@ -1,0 +1,16 @@
+---
+- name: Security compliance
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure SSH is configured securely
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PermitRootLogin'
+        line: 'PermitRootLogin no'
+    - name: Ensure firewall is enabled and running
+      ufw:
+        state: enabled
+    - name: Apply latest security patches
+      apt:
+        upgrade: full
