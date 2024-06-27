@@ -1,0 +1,14 @@
+---
+- name: Backup and restore
+  hosts: all
+  become: yes
+  tasks:
+    - name: Backup database
+      command: pg_dumpall > /var/backups/all_databases.sql
+    - name: Copy backup to remote storage
+      synchronize:
+        src: /var/backups/all_databases.sql
+        dest: remoteuser@backupserver:/backups/
+    - name: Restore database (when needed)
+      command: psql -f /var/backups/all_databases.sql
+      when: restore_needed
