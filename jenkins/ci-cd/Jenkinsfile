@@ -13,7 +13,7 @@ pipeline {
                 // Build the Docker image
                 sh 'cd jenkins/ci-cd'
                 sh 'ls -la'
-                sh 'docker build -f docker/dockerBuild-01/Dockerfile -t app .'
+                sh 'docker build -f jenkins/ci-cd/Dockerfile -t app .'
             }
         }
 
