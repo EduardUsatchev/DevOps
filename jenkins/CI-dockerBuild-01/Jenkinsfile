@@ -1,40 +1,31 @@
+# Jenkinsfile
 pipeline {
     agent any
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+    }
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout the repository
-                git(url: 'https://github.com/EduardUsatchev/DevOps.git', branch: 'main')
-            }
-        }
-
         stage('Build') {
             steps {
-                // Build the Docker image
-                sh 'cd docker/dockerBuild-01/'
-                sh 'ls -la'
-                sh 'docker build -f docker/dockerBuild-01/Dockerfile -t app .'
+                script {
+                    dockerImage = docker.build("<your-dockerhub-username>/flask-app")
+                }
             }
         }
-
-        stage('Run') {
+        stage('Push') {
             steps {
-                // Run the Docker container
-                sh 'docker run -d  --name app app'
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
+                        dockerImage.push('latest')
+                    }
+                }
             }
         }
-
-
-        stage('Finalize') {
+        stage('Deploy') {
             steps {
-                // Terminate the Docker container
-                sh 'docker stop app'
-                sh 'docker rm app'
-
-                // Tag and push the Docker image to DockerHub
-               sh 'docker tag app eduardusatchev/app:latest'
-               sh 'docker push eduardusatchev/app:latest'
-
+                script {
+                    sh 'ansible-playbook deploy.yaml'
+                }
             }
         }
     }
