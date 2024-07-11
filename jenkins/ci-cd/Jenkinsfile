@@ -22,25 +22,37 @@ pipeline {
                 // Run the Docker container
                 sh 'docker run -d -p 5000:5000  --name app app'
             }
+                // Ensure services are up
+                script {
+                    sleep 15 // Adjust the sleep time as necessary
+                }
         }
         stage('Test') {
-            steps {
-                sh 'python test_app.py'
+steps {
+                script {
+                    try {
+                        sh 'python test_app.py'
+                    } catch (Exception e) {
+                        currentBuild.result = 'FAILURE'
+                        throw e
+                    }
+                }
             }
         }
 
 
-//         stage('Finalize') {
-//             steps {
-//                 // Terminate the Docker container
-//                 sh 'docker stop app'
-//                 sh 'docker rm app'
-//
-//                 // Tag and push the Docker image to DockerHub
-//                sh 'docker tag app eduardusatchev/app:latest'
-//                sh 'docker push eduardusatchev/app:latest'
-//
-//             }
+         stage('Finalize') {
+            when {
+                expression {
+                    currentBuild.result == null || currentBuild.result == 'SUCCESS'
+                }
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_ID')]) {
+                    sh 'docker login -u $DOCKER_ID -p $DOCKER_PASSWORD'
+                    sh 'docker tag app:latest eduardusatchev/app:latest'
+                    sh 'docker push eduardusatchev/eduardusatchev:latest'
+                }
         }
     }
 }
