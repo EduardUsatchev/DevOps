@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the repository
+                git(url: 'https://github.com/EduardUsatchev/DevOps.git', branch: 'main')
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Build the Docker image
+                sh 'cd jenkins/ci-cd'
+                sh 'ls -la'
+                sh 'docker build -f docker/dockerBuild-01/Dockerfile -t app .'
+            }
+        }
+
+        stage('Run') {
+            steps {
+                // Run the Docker container
+                sh 'docker run -d -p 5000:5000  --name app app'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'python test_app.py'
+            }
+        }
+
+
+//         stage('Finalize') {
+//             steps {
+//                 // Terminate the Docker container
+//                 sh 'docker stop app'
+//                 sh 'docker rm app'
+//
+//                 // Tag and push the Docker image to DockerHub
+//                sh 'docker tag app eduardusatchev/app:latest'
+//                sh 'docker push eduardusatchev/app:latest'
+//
+//             }
+        }
+    }
+}

@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  jenkins:
+    build: .
+    network_mode: "bridge"
+    container_name: jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    environment:
+      JENKINS_USER: admin
+      JENKINS_PASS: admin
+      JAVA_OPTS: "-Djenkins.install.runSetupWizard=true -Djenkins.httpPort=8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock # To run Docker commands inside the container
+
+volumes:
+  jenkins_home:
