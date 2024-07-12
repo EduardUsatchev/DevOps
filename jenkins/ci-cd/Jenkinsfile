@@ -11,11 +11,11 @@ pipeline {
         stage('Build') {
             steps {
                 // Build the Docker image
-                sh 'pwd'
+                dir('jenkins/ci-cd') {
+                  sh "pwd"
+                }
                 sh 'ls -la'
-                sh 'cd jenkins/ci-cd'
-                sh 'ls -la'
-                sh 'docker build -f jenkins/ci-cd/Dockerfile -t app .'
+                sh 'docker build -t app .'
             }
         }
 
