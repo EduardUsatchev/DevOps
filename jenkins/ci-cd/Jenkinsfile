@@ -11,6 +11,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Build the Docker image
+                sh 'pwd'
                 sh 'ls -la'
                 sh 'cd jenkins/ci-cd'
                 sh 'ls -la'
