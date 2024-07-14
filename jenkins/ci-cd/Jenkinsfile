@@ -20,20 +20,22 @@ pipeline {
 
         stage('Run') {
             steps {
-                // Define the container name
-                 def containerName = "app"
+                script {
+                    // Define the container name
+                     def containerName = "app"
 
-                // Check if the container is running
-                    def isRunning = sh(script: "docker ps --filter 'name=${containerName}' --filter 'status=running' -q", returnStdout: true).trim()
+                    // Check if the container is running
+                        def isRunning = sh(script: "docker ps --filter 'name=${containerName}' --filter 'status=running' -q", returnStdout: true).trim()
 
-                    if (isRunning) {
-                // Stop the running container
-                        sh "docker stop ${containerName}"
-                        }
-                // Run the Docker container
-                sh 'docker run -d -p 5000:5000  --name app app'
+                        if (isRunning) {
+                    // Stop the running container
+                            sh "docker stop ${containerName}"
+                            }
+                    // Run the Docker container
+                    sh 'docker run -d -p 5000:5000  --name app app'
 
-                // Ensure services are up
+                    // Ensure services are up
+                }
                 script {
                     sleep 15 // Adjust the sleep time as necessary
                 }
