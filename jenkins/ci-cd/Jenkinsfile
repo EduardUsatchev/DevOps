@@ -35,8 +35,9 @@ pipeline {
                  {
                     try {
                         sh '''
+                        apt install python -y
                         python test_app.py
-                        apt install python -y '''
+                         '''
                     }
                     catch (Exception e)
                     {
