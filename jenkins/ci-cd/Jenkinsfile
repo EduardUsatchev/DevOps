@@ -50,7 +50,7 @@ pipeline {
                         sh '''
                         cd /var/jenkins_home/workspace/cicd/jenkins/ci-cd
                         pwd
-                        python test_app.py
+                        docker exec app python test_app.py
                          '''
                     }
                     catch (Exception e)
