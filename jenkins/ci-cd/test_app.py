@@ -1,6 +1,7 @@
-# test_app.py
 import unittest
+import sys
 from app import app
+
 
 class FlaskAppTestCase(unittest.TestCase):
     def setUp(self):
@@ -16,5 +17,13 @@ class FlaskAppTestCase(unittest.TestCase):
         # Assert the response data is 'Hello, World!'
         self.assertEqual(response.data.decode(), 'Hello, World!')
 
+
 if __name__ == '__main__':
-    unittest.main()
+    # Run tests
+    result = unittest.TextTestRunner(verbosity=2).run(unittest.makeSuite(FlaskAppTestCase))
+
+    # Exit with appropriate status code
+    if result.wasSuccessful():
+        sys.exit(0)  # Success
+    else:
+        sys.exit(1)  # Failure
