@@ -12,7 +12,7 @@ ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 
 # Install necessary packages
 RUN apt-get update --fix-missing \
-    && apt-get install -qqy apt-transport-https ca-certificates curl dnsutils gnupg2 software-properties-common
+    && apt-get install -qqy apt-transport-https ca-certificates curl dnsutils gnupg2 software-properties-common python3
 
 # Add Docker's official GPG key
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
