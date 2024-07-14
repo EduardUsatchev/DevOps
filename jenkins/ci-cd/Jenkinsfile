@@ -20,6 +20,16 @@ pipeline {
 
         stage('Run') {
             steps {
+                // Define the container name
+                 def containerName = "app"
+
+                // Check if the container is running
+                    def isRunning = sh(script: "docker ps --filter 'name=${containerName}' --filter 'status=running' -q", returnStdout: true).trim()
+
+                    if (isRunning) {
+                // Stop the running container
+                        sh "docker stop ${containerName}"
+                        }
                 // Run the Docker container
                 sh 'docker run -d -p 5000:5000  --name app app'
 
@@ -35,6 +45,8 @@ pipeline {
                  {
                     try {
                         sh '''
+                        cd /var/jenkins_home/workspace/cicd/jenkins/ci-cd
+                        pwd
                         python test_app.py
                          '''
                     }
