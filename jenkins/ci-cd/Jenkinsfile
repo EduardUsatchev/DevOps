@@ -14,7 +14,7 @@ pipeline {
                 sh '''
                 cd /var/jenkins_home/workspace/cicd/jenkins/ci-cd
                 pwd
-                docker build -f jenkins/ci-cd/Dockerfile -t app .'''
+                docker build -t app .'''
             }
         }
 
