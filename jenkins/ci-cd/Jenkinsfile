@@ -35,7 +35,6 @@ pipeline {
                  {
                     try {
                         sh '''
-                        apt install python -y
                         python test_app.py
                          '''
                     }
