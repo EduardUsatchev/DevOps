@@ -25,7 +25,7 @@ pipeline {
                      def containerName = "app"
 
                     // Check if the container is running
-                        def isRunning = sh(script: "docker ps --filter 'name=${containerName}' --filter 'status=running' -q", returnStdout: true).trim()
+                        def isRunning = sh(script: "docker ps -f name=${containerName} -a", returnStdout: true).trim()
 
                         if (isRunning) {
                     // Stop the running container
