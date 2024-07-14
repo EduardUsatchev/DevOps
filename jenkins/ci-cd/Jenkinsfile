@@ -33,7 +33,9 @@ pipeline {
 steps {
                 script {
                     try {
-                        sh 'python test_app.py'
+                        sh '''
+                        python test_app.py
+                        apt install python -y '''
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
                         throw e
