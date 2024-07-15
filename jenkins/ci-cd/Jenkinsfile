@@ -82,9 +82,10 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_ID')]) {
-                    sh 'docker login -u $DOCKER_ID -p $DOCKER_PASSWORD'
-                    sh 'docker tag app:latest eduardusatchev/app:latest'
-                    sh 'docker push eduardusatchev/app:latest'
+                    sh '''
+                    docker login -u $DOCKER_ID -p $DOCKER_PASSWORD
+                    docker tag app:latest eduardusatchev/app:latest
+                    docker push eduardusatchev/app:latest'''
                 }
         }
     }
