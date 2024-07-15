@@ -83,8 +83,8 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_ID')]) {
                     sh '''
-                    docker tag app:latest eduardusatchev/app:latest
-                    docker push eduardusatchev/app:latest'''
+                    docker tag app:latest a18ab77c4b90/app:latest
+                    docker push a18ab77c4b90/app:latest'''
                 }
         }
     }
