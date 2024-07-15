@@ -49,3 +49,4 @@ pipeline-stage-step
 blueocean
 blueocean-autofavorite
 gitlab-plugin
+pipeline-graph-view
