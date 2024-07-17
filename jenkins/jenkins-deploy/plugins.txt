@@ -50,3 +50,6 @@ blueocean
 blueocean-autofavorite
 gitlab-plugin
 pipeline-graph-view
+ansible
+docker-workflow
+kubernetes
