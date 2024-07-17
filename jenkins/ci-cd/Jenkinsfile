@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        ANSIBLE_CONFIG = '/etc/ansible/ansible.cfg'
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -42,11 +45,14 @@ pipeline {
                 }
             }
         }
-        stage('Test') {
-            steps {
+        stage('Test')
+        {
+            steps
+            {
                 script
                  {
-                    try {
+                    try
+                    {
                         sh '''
                         cd /var/jenkins_home/workspace/cicd/jenkins/ci-cd
                         pwd
@@ -63,30 +69,44 @@ pipeline {
                         // Check if the container is running
                             def isRunning = sh(script: "docker ps --filter 'name=${containerName}' --filter 'status=running' -q", returnStdout: true).trim()
 
-                            if (isRunning) {
-                        // Stop the running container
+                            if (isRunning)
+                            {
+                                // Stop the running container
                                 sh "docker stop ${containerName}"
                                 sh "docker rm ${containerName}"
-                                }
+                            }
                     }
                 }
             }
-        }
+            }
 
-
-         stage('Finalize') {
-            when {
-                expression {
+         stage('Finalize')
+         {
+            when
+            {
+                expression
+                {
                     currentBuild.result == null || currentBuild.result == 'SUCCESS'
                 }
             }
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_ID')]) {
+            steps
+            {
+                withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_ID')])
+                {
                     sh '''
                     docker tag app:latest a18ab77c4b90/app:latest
                     docker push a18ab77c4b90/app:latest'''
                 }
+            }
         }
-    }
+
+        stage('Deploy to Minikube')
+        {
+            steps
+            {
+                ansiblePlaybook(
+                    playbook: 'deploy.yaml',inventory: 'hosts')
+            }
+        }
    }
- }
+}

@@ -1,8 +1,17 @@
-# deploy.yaml
-- hosts: localhost
-  tasks:
-    - name: Apply Kubernetes deployment
-      shell: kubectl apply -f deployment.yaml
+---
+- name: Deploy to Minikube
+  hosts: minikube
+  become: yes
 
-    - name: Apply Kubernetes service
-      shell: kubectl apply -f service.yaml
+  tasks:
+    - name: Ensure kubectl is installed
+      apt:
+        name: kubectl
+        state: present
+
+    - name: Create Kubernetes namespace
+      command: kubectl create namespace app
+      ignore_errors: yes
+
+    - name: Apply Kubernetes manifests
+      command: kubectl apply -f jenkins/ci-cd/deployment.yaml -n my-namespace
