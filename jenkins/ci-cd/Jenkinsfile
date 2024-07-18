@@ -15,7 +15,7 @@ pipeline {
             steps {
                 // Build the Docker image
                 sh '''
-                cd /var/jenkins_home/workspace/cicd/jenkins/ci-cd
+                cd /var/jenkins_home/workspace/cicd/jenkins/ci-cd/app/
                 pwd
                 docker build -t app .'''
             }
@@ -54,7 +54,7 @@ pipeline {
                     try
                     {
                         sh '''
-                        cd /var/jenkins_home/workspace/cicd/jenkins/ci-cd
+                        cd /var/jenkins_home/workspace/cicd/jenkins/ci-cd/app/
                         pwd
                         docker exec app python test_app.py
                          '''
@@ -104,8 +104,21 @@ pipeline {
         {
             steps
             {
-                ansiblePlaybook(
-                    playbook: 'deploy.yaml',inventory: 'hosts')
+                withCredentials([sshUserPrivateKey(credentialsId: 'ansible_ssh_key', keyFileVariable: 'SSH_KEY_PATH')]) {
+                    // Read the template
+                    def inventoryTemplate = readFile 'jenkins/ci-cd/hosts.template'
+
+                    // Replace placeholder with actual SSH key path
+                    def inventoryContent = inventoryTemplate.replace('${SSH_KEY_PATH}', SSH_KEY_PATH)
+
+                    // Write the final inventory file
+                    writeFile file: 'jenkins/ci-cd/hosts', text: inventoryContent
+
+                    // Execute the Ansible playbook
+                    ansiblePlaybook(
+                        playbook: 'jenkins/ci-cd/deploy.yaml',
+                        inventory: 'jenkins/ci-cd/hosts'
+                    )
             }
         }
    }
