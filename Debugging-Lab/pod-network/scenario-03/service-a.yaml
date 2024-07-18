@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-a
+spec:
+  selector:
+    app: pod-a
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80

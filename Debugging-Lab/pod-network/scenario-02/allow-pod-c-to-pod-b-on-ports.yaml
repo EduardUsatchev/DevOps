@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-pod-c-to-pod-b-on-ports
+spec:
+  podSelector:
+    matchLabels:
+      app: pod-b
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: pod-c
+    ports:
+    - protocol: TCP
+      port: 80
