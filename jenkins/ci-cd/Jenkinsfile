@@ -100,26 +100,27 @@ pipeline {
             }
         }
 
-        stage('Deploy to Minikube')
-        {
-            steps
-            {
-                withCredentials([sshUserPrivateKey(credentialsId: 'ansible_ssh_key', keyFileVariable: 'SSH_KEY_PATH')]) {
-                    // Read the template
-                    def inventoryTemplate = readFile 'jenkins/ci-cd/hosts.template'
 
-                    // Replace placeholder with actual SSH key path
-                    def inventoryContent = inventoryTemplate.replace('${SSH_KEY_PATH}', SSH_KEY_PATH)
-
-                    // Write the final inventory file
-                    writeFile file: 'jenkins/ci-cd/hosts', text: inventoryContent
-
-                    // Execute the Ansible playbook
-                    ansiblePlaybook(
-                        playbook: 'jenkins/ci-cd/deploy.yaml',
-                        inventory: 'jenkins/ci-cd/hosts'
-                    )
-            }
-        }
+//         stage('Deploy to Minikube')
+//         {
+//             steps
+//             {
+//                 withCredentials([sshUserPrivateKey(credentialsId: 'ansible_ssh_key', keyFileVariable: 'SSH_KEY_PATH')])
+//                 {
+//                     // Read the template
+//                     def inventoryTemplate = readFile 'jenkins/ci-cd/hosts.template'
+//
+//                     // Replace placeholder with actual SSH key path
+//                     def inventoryContent = inventoryTemplate.replace('${SSH_KEY_PATH}', SSH_KEY_PATH)
+//
+//                     // Write the final inventory file
+//                     writeFile file: 'jenkins/ci-cd/hosts', text: inventoryContent
+//
+//                     // Execute the Ansible playbook
+//                     ansiblePlaybook(
+//                         playbook: 'jenkins/ci-cd/deploy.yaml',
+//                         inventory: 'jenkins/ci-cd/hosts')
+//                 }
+//             }
    }
 }
