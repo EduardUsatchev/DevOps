@@ -24,11 +24,19 @@ pipeline {
         stage('Run') {
             steps {
                 script {
-                    // Define the container name
-                     def containerName = "app"
+                    def containerName = "app"
+                    def command = "docker ps -f name=${containerName} -a"
+                    def commandOutput = sh(script: command, returnStdout: true).trim()
 
-                    // Check if the container is running
-                        def isRunning = sh(script: "docker ps -f name=${containerName} -a", returnStdout: true).trim()
+                    echo "Command: ${command}"
+                    echo "Output: ${commandOutput}"
+
+                    def isRunning = sh(script: "docker ps -q -f name=${containerName}", returnStdout: true).trim()
+                    if (isRunning) {
+                        echo "Container ${containerName} is running."
+                    } else {
+                        echo "Container ${containerName} is not running."
+                    }
 
                         if (isRunning) {
                     // Stop the running container
