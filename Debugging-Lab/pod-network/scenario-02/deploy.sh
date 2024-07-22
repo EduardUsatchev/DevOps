@@ -1,4 +1,4 @@
-minikube start -p eduard --cni calico
+minikube start -p eduard --cni calicoc
 kubectl apply -f pod-a.yaml
 kubectl apply -f pod-b.yaml
 kubectl apply -f pod-c.yaml

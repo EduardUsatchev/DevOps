@@ -31,7 +31,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Copy installed Python dependencies from build stage
-COPY --from=build /usr/local/lib/python${pythonVersion}/site-packages/ /usr/local/lib/python${pythonVersion}/site-packages/
+COPY --from=build /usr/local/lib/python3.9/site-packages/ /usr/local/lib/python3.9/site-packages/
 
 # Create and set working directory
 WORKDIR /app
