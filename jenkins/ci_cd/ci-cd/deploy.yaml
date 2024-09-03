@@ -14,4 +14,4 @@
       ignore_errors: yes
 
     - name: Apply Kubernetes manifests
-      command: kubectl apply -f jenkins/ci-cd/k8s-manifests/deployment.yaml -n my-namespace
+      command: kubectl apply -f jenkins/ci_cd/k8s_manifests/deployment.yaml -n my-namespace
