@@ -1,2 +1,13 @@
 .idea/**
 jenkins/jenkins_deploy/jenkins_home**
+../../.DS_Store
+../../cognyte_devops_lab/
+../
+../../docker/.DS_Store
+../../docker/entrypoint_dockerfile/db_data/
+../../docker/entrypoint_dockerfile/logs/
+../../docker/flask_docker_build/.DS_Store
+../../docker/logs_dockerfile/logs/
+../../docker/storage_dockerfile/data/
+../../jenkins/jenkins_deploy/agent.jar
+../../terraform/terraform_example/.terraform/
