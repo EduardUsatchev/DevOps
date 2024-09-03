@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-slave
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: redis
+      appname: guestbook   # Added label here
+  template:
+    metadata:
+      labels:
+        app: redis
+        appname: guestbook   # Added label here
+    spec:
+      containers:
+      - name: slave
+        image: redis
+        ports:
+        - containerPort: 6379
