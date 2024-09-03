@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mariadb:10.5.8
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: mysql-root-password
+        ports:
+        - containerPort: 3306
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - mysqladmin ping -u root -p$(MYSQL_ROOT_PASSWORD)
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - mysqladmin ping -u root -p$(MYSQL_ROOT_PASSWORD)
+          initialDelaySeconds: 5
+          periodSeconds: 10
+
