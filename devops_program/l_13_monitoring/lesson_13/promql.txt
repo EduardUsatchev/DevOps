@@ -1,0 +1,2 @@
+node_cpu_seconds_total{cpu="0",mode="idle"}
+rate(node_cpu_seconds_total[5m])
