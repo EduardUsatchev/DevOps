@@ -1,0 +1,29 @@
+version: '3.3'
+
+services:
+  db:
+    image: nginx:alpine
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ediedi
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: edi
+      MYSQL_PASSWORD: 1q2w3e
+
+  wordpress:
+    depends_on:
+      - db
+    image: nginx:alpine
+    ports:
+      - "8000:80"
+    restart: always
+    environment:
+      MOSHE: david
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+volumes:
+    db_data: {}
