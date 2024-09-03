@@ -1,0 +1,22 @@
+def getStartedBanner(){
+
+    return "*********** Starts here **********"
+}
+age=41
+node("edi"){
+    stage("one"){
+        echo getStartedBanner()
+    }
+    if(age > 40) {
+        stage("two"){
+            name = "eduard"
+            if(name == "eduard"){
+                echo "ByeBye"
+                sh "date"
+            }
+            else{
+                echo "YOU ARE NOT EDUARD"
+            }
+        }
+    }
+}

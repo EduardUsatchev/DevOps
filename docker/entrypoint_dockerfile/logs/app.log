@@ -1,0 +1,35 @@
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.80.3:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:root:Hello, World! endpoint was reached
+INFO:werkzeug:192.168.65.1 - - [17/Jun/2024 11:18:36] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.80.2:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.80.3:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:root:Hello, World! endpoint was reached
+INFO:werkzeug:192.168.65.1 - - [18/Jul/2024 14:16:19] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.80.2:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:root:Hello, World! endpoint was reached
+INFO:werkzeug:192.168.65.1 - - [18/Jul/2024 14:16:40] "GET / HTTP/1.1" 200 -
+INFO:root:Hello, World! endpoint was reached
+INFO:werkzeug:192.168.65.1 - - [18/Jul/2024 14:16:41] "GET / HTTP/1.1" 200 -
+INFO:root:Hello, World! endpoint was reached
+INFO:werkzeug:192.168.65.1 - - [18/Jul/2024 14:16:43] "GET / HTTP/1.1" 200 -
+INFO:root:Hello, World! endpoint was reached
+INFO:werkzeug:192.168.65.1 - - [18/Jul/2024 14:16:44] "GET / HTTP/1.1" 200 -
+INFO:root:Hello, World! endpoint was reached
+INFO:werkzeug:192.168.65.1 - - [18/Jul/2024 14:17:12] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:192.168.65.1 - - [18/Jul/2024 14:17:29] "[31m[1mGET /data HTTP/1.1[0m" 405 -
