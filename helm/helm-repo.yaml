@@ -1,0 +1,36 @@
+name: Publish Helm Charts
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: v3.11.0
+
+      - name: Package Helm Charts
+        run: |
+          mkdir -p packaged
+          for chart in charts/*; do
+            helm package "$chart" --destination packaged
+          done
+
+      - name: Create Helm Repository Index
+        run: |
+          helm repo index packaged --url https://<YOUR_GITHUB_USERNAME>.github.io/<REPOSITORY_NAME>
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./packaged
