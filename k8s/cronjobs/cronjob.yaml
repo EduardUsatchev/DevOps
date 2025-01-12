@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: db-backup
+spec:
+  schedule: "0 3 * * *"               # Run every day at 3 AM
+  successfulJobsHistoryLimit: 3        # Retain only the last 3 successful Jobs
+  failedJobsHistoryLimit: 1            # Retain only the last failed Job
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: db-backup
+            image: backup-image
+          restartPolicy: Never
