@@ -138,4 +138,4 @@ This repository is licensed under the [MIT License](LICENSE). You are free to us
 
 ## Contact
 
-For any questions or inquiries, please contact Eduard Usatchev at [your-email@example.com](mailto:your-email@example.com).
+For any questions or inquiries, please contact Eduard Usatchev at [eduard.usatchev@gmail.com](mailto:eduard.usatchev@gmail.com).
