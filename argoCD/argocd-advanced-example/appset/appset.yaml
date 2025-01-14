@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: multi-env-appset
+spec:
+  generators:
+    - list:
+        elements:
+          - environment: dev
+          - environment: staging
+          - environment: prod
+  template:
+    metadata:
+      name: '{{environment}}-app'
+    spec:
+      source:
+        repoURL: https://github.com/user/repo.git
+        path: k8s-manifests
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{environment}}'
