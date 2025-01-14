@@ -1,0 +1,20 @@
+
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: python-app-alert-rules
+  labels:
+    prometheus: prometheus-stack
+    role: alert-rules
+spec:
+  groups:
+  - name: python-app.rules
+    rules:
+    - alert: PythonAppRestarts
+      expr: rate(kube_pod_container_status_restarts_total{pod=~"python-app-.*"}[5m]) > 0
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Python app is restarting"
+        description: "The Python app has restarted more than once in the last 5 minutes."

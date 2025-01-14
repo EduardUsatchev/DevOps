@@ -1,0 +1,11 @@
+
+1. Launched an EC2 instance using Amazon Linux 2 AMI (t2.micro).
+2. Created a key pair and used it to SSH into the instance using the command:
+   ssh -i ec2-key.pem ec2-user@<public-ip-address>
+3. Installed Docker and ran an Nginx container using:
+   sudo yum install docker -y
+   sudo systemctl start docker
+   docker run -d --name docker-nginx -p 80:80 nginx
+4. Configured security groups to allow traffic on port 80.
+5. Verified Nginx page at http://<public-ip-address>.
+    

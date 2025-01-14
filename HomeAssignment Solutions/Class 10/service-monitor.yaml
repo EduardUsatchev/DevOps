@@ -1,0 +1,15 @@
+
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: python-app-monitor
+  labels:
+    release: prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app: python-app
+  endpoints:
+  - port: http
+    path: /
+    interval: 30s

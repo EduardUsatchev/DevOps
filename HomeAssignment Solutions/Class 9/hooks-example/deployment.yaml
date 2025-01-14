@@ -1,0 +1,25 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hooks-app
+  labels:
+    app: hooks-app
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hooks-app
+  template:
+    metadata:
+      labels:
+        app: hooks-app
+    spec:
+      containers:
+      - name: hooks-app
+        image: nginx:1.21
+        ports:
+        - containerPort: 80
+    

@@ -1,0 +1,5 @@
+
+1. Allocated an Elastic IP in the AWS console.
+2. Associated the Elastic IP with the running EC2 instance.
+3. Verified the instance is accessible using the Elastic IP at http://<elastic-ip>.
+    

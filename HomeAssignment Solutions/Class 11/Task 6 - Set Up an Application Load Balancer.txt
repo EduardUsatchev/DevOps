@@ -1,0 +1,5 @@
+
+1. Created an Application Load Balancer (ALB) with HTTP listeners on port 80.
+2. Registered the EC2 instance as a target for the ALB.
+3. Verified the load balancer by accessing its DNS name in a browser.
+    

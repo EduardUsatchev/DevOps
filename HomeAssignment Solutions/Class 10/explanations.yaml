@@ -1,0 +1,14 @@
+
+explanations:
+  - step: "Start Minikube"
+    description: "Start a Minikube cluster with sufficient resources to run the Prometheus stack and Python app."
+  - step: "Deploy Python app"
+    description: "Deploy a simple Python app using Kubernetes manifests and expose it via a service."
+  - step: "Install Prometheus stack"
+    description: "Use Helm to install the Prometheus and Grafana stack to monitor the Python app."
+  - step: "Create ServiceMonitor"
+    description: "Define a ServiceMonitor to allow Prometheus to scrape metrics from the Python app."
+  - step: "Create Alert Rules"
+    description: "Create Prometheus alert rules to trigger an alert when the Python app restarts."
+  - step: "Set up ArgoCD"
+    description: "Install and configure ArgoCD to enable GitOps-style deployment for the Python app."

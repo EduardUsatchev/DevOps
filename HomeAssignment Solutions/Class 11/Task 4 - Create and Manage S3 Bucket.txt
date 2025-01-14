@@ -1,0 +1,7 @@
+
+1. Created an S3 bucket named my-demo-bucket in the preferred region.
+2. Uploaded a sample text file and enabled public access to it.
+3. Verified public URL: http://<bucket-name>.s3.<region>.amazonaws.com/<file-name>
+4. Enabled versioning for the bucket.
+5. Uploaded a new version of the same file and verified versioning.
+    

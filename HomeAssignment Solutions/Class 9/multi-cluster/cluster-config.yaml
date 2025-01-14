@@ -1,0 +1,14 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-config
+  namespace: kube-system
+data:
+  config: |
+    clusters:
+      - name: cluster-1
+        address: https://cluster1.example.com
+      - name: cluster-2
+        address: https://cluster2.example.com
+    

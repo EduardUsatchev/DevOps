@@ -1,0 +1,8 @@
+
+1. Created an IAM user named dev-user with programmatic access.
+2. Attached the AdministratorAccess policy to the user.
+3. Configured AWS CLI using:
+   aws configure
+4. Listed EC2 instances using:
+   aws ec2 describe-instances --output table
+    

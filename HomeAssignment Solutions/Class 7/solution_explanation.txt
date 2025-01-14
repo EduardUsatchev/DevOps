@@ -1,0 +1,22 @@
+### Solution Explanation
+
+**Part 1: Setting Up a Repository and Branching**
+1. A Python project named `assignment_project` is created with a file `main.py`.
+2. The main branch was initialized, and a new branch `feature/print-date` was created to add a feature for printing the current date and time.
+3. The branch was pushed to GitHub, and a pull request was created and merged after review.
+
+**Part 2: Working with Pull Requests and Code Reviews**
+1. Another branch `feature/print-name` was created to add a feature for printing the user's name.
+2. A pull request was created, leading to a merge conflict due to changes in the same section of code as `feature/print-date`.
+3. The conflict was resolved manually, and the pull request was merged.
+
+**Part 3: Cherry-Picking and Advanced Git Operations**
+1. A branch `hotfix/print-hello` was created, and a commit was made to add a "Hello World" message.
+2. The commit was cherry-picked onto the `main` branch without merging the branch history.
+3. The cherry-pick was verified using `git log`.
+
+**Part 4: Git Configuration and Aliases**
+1. The global username and email were set using `git config --global` commands.
+2. The default branch name was set to `main` using `git config`.
+3. Git aliases were configured for `checkout`, `branch`, `commit`, and `status` commands.
+4. A global `.gitignore` file was created to ignore `.DS_Store` files.

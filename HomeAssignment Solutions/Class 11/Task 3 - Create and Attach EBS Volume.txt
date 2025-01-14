@@ -1,0 +1,9 @@
+
+1. Created a new 5 GB EBS volume of type General Purpose SSD.
+2. Attached the volume to the EC2 instance.
+3. Connected to the instance via SSH and executed the following commands:
+   sudo mkfs -t ext4 /dev/xvdf
+   sudo mkdir /data
+   sudo mount /dev/xvdf /data
+4. Verified that the volume was successfully mounted by running 'df -h'.
+    
