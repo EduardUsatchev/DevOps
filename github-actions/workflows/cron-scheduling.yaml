@@ -1,0 +1,13 @@
+name: Scheduled Workflow
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run a Scheduled Task
+        run: echo "Scheduled task executed at $(date -u)"

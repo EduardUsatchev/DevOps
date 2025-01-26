@@ -1,0 +1,23 @@
+name: Reusable Test Workflow
+on:
+  workflow_call:
+    inputs:
+      node_version:
+        required: true
+        type: string
+    secrets:
+      TEST_SECRET:
+        required: true
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ inputs.node_version }}
+      - name: Run Tests
+        run: npm test

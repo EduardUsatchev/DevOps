@@ -1,0 +1,32 @@
+name: Outputs and Artifacts
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Output
+        run: echo "::set-output name=build_id::12345"
+    outputs:
+      build_id: ${{ steps.generate_output.outputs.build_id }}
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Use Output
+        run: echo "Build ID: ${{ needs.build.outputs.build_id }}"
+
+  save-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Artifact
+        run: echo "This is an artifact" > artifact.txt
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: artifact.txt

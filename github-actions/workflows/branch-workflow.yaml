@@ -1,0 +1,25 @@
+name: Branch Workflow
+on:
+  push:
+    branches:
+      - 'main'
+      - 'feature/*'
+
+jobs:
+  deploy:
+    if: startsWith(github.ref, 'refs/heads/main')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Deploy to Production
+        run: echo "Deploying to production..."
+
+  build:
+    if: startsWith(github.ref, 'refs/heads/feature/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Build Feature Branch
+        run: echo "Building feature branch..."

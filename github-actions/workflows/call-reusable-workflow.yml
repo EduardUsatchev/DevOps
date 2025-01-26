@@ -1,0 +1,13 @@
+name: Call Reusable Workflow
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  use-reusable:
+    uses: my-org/my-repo/.github/workflows/reusable-workflow.yml@main
+    with:
+      node_version: '16'
+    secrets:
+      TEST_SECRET: ${{ secrets.TEST_SECRET }}
