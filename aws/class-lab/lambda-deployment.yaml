@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lambda-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lambda
+  template:
+    metadata:
+      labels:
+        app: lambda
+    spec:
+      containers:
+      - name: lambda-container
+        image: python:3.8
+        command: ["/bin/sh", "-c"]
+        args:
+          - "pip install boto3 && python3 -u /app/lambda_function.py"
+        volumeMounts:
+          - name: lambda-code
+            mountPath: /app
+      volumes:
+        - name: lambda-code
+          configMap:
+            name: lambda-code
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lambda-code
+data:
+  lambda_function.py: |
+    import json
+    import boto3
+    import os
+
+    def lambda_handler(event, context):
+        client = boto3.client('secretsmanager', endpoint_url=os.getenv('LOCALSTACK_ENDPOINT', 'http://localhost:4566'))
+        secret = client.get_secret_value(SecretId="MyDatabaseSecret")
+        secret_data = json.loads(secret['SecretString'])
+        return {
+            'statusCode': 200,
+            'body': json.dumps(f"Retrieved secret: {secret_data}")
+        }

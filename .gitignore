@@ -15,3 +15,4 @@ devops_program/l_14_15_terraform/lesson_14/tf-demo/ex2/dev/my-new-service-terru/
 .terragrunt-cache/
 docker/entrypoint_dockerfile/db_data/*
 .DS_Store
+terraform/
