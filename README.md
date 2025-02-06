@@ -136,6 +136,3 @@ Contributions are welcome! If you have improvements or suggestions, please fork 
 
 This repository is licensed under the [MIT License](LICENSE). You are free to use, modify, and distribute the code, provided proper attribution is given.
 
-## Contact
-
-For any questions or inquiries, please contact Eduard Usatchev at [your-email@example.com](mailto:your-email@example.com).
