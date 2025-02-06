@@ -140,16 +140,4 @@ This project is licensed under the **MIT License**. You are free to use, modify,
 ## **🙌 Contributing**
 Contributions are welcome! Feel free to submit issues, feature requests, or pull requests.
 
-## **📧 Contact**
-For any questions, reach out via GitHub Issues or email me at **your-email@example.com**.
-
----
-
-## **🚀 Next Steps**
-Would you like to:
-- ☁️ **Deploy this setup in AWS Cloud?**
-- 🤖 **Integrate CI/CD with GitHub Actions?**
-- 📊 **Add monitoring with Prometheus/Grafana?**
-
-This lab is a **powerful DevOps learning experience**—let me know how you'd like to extend it! 🚀
 
