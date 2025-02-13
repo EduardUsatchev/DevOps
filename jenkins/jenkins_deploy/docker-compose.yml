@@ -3,6 +3,7 @@ version: '3.8'
 services:
   jenkins:
     build: .
+#    image: jenkins/jenkins
     network_mode: "bridge"
     container_name: jenkins
     ports:

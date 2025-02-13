@@ -1,0 +1,15 @@
+replicaCount: 2
+
+image:
+  repository: myrepo/myapp
+  tag: "1.0.0"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
+
+# Default environment variables (can be overridden per environment)
+envVars:
+  ENV: "default"
+  LOG_LEVEL: "info"

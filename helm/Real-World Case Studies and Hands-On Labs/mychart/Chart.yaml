@@ -1,0 +1,8 @@
+apiVersion: v2
+name: mychart
+description: A sample Helm chart for multi-environment deployment
+version: 0.1.0
+appVersion: "1.0.0"
+maintainers:
+  - name: Eduard Usatchev
+    email: eduard@example.com

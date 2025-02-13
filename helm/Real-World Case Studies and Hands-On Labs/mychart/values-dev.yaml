@@ -1,0 +1,13 @@
+# Development-specific override values
+
+replicaCount: 1
+
+image:
+  tag: "1.0.0-dev"
+
+envVars:
+  ENV: "development"
+  LOG_LEVEL: "debug"
+
+service:
+  port: 8081

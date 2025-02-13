@@ -1,0 +1,14 @@
+# Production-specific override values
+
+replicaCount: 4
+
+image:
+  tag: "1.0.0-prod"
+  pullPolicy: Always
+
+envVars:
+  ENV: "production"
+  LOG_LEVEL: "warn"
+
+service:
+  port: 80
