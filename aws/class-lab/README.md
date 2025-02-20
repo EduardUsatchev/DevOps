@@ -134,7 +134,7 @@ cat response.json
 
 ---
 
-# **DEBUG**
+# **🐞🚨❌ DEBUG 🐞🚨❌**
 The error message **"❌ K3s failed to start! Check kubeconfig."** suggests that **K3s is installed but not running properly** inside Multipass. Let's troubleshoot and fix this issue step by step.
 
 ---
