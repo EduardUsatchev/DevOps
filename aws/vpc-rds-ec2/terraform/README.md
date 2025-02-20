@@ -119,5 +119,3 @@ Here are some commonly used Terraform commands for reference:
   ```
 
 ---
-
-This README provides an overview of the scripts and commands needed to manage the infrastructure environments with Terraform and LocalStack.
