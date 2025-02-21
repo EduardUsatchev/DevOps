@@ -66,6 +66,12 @@ resource "aws_iam_role" "lambda_role" {
     }]
   })
 }
+resource "aws_sqs_queue" "my_queue" {
+  name                      = "MyQueue"
+  message_retention_seconds = 86400
+  visibility_timeout_seconds = 30
+}
+
 
 resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
   role       = aws_iam_role.lambda_role.name
