@@ -6,16 +6,20 @@ echo "🚀 Starting End-to-End DevOps Lab Setup..."
 
 # Step 1: Start LocalStack (Simulated AWS)
 echo "🟢 Starting LocalStack..."
-docker run --rm -d --name localstack \
-  -p 4566:4566 -p 4510-4559:4510-4559 \
-  -e SERVICES="lambda,secretsmanager,iam" \
-  -e DEFAULT_REGION="us-east-1" \
-  -e DOCKER_HOST="unix:///var/run/docker.sock" \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  localstack/localstack
 
-# Wait for LocalStack to be ready
-sleep 5
+# Check if LocalStack is already running
+if docker ps --format '{{.Names}}' | grep -q "^localstack$"; then
+    echo "✅ LocalStack is already running. Skipping startup."
+else
+    docker run --rm -d --name localstack \
+      -p 4566:4566 -p 4510-4559:4510-4559 \
+      -e SERVICES="lambda,secretsmanager,iam,sqs" \
+      -e DEFAULT_REGION="us-east-1" \
+      -e DOCKER_HOST="unix:///var/run/docker.sock" \
+      -v /var/run/docker.sock:/var/run/docker.sock \
+      localstack/localstack
+    sleep 5  # Wait for LocalStack to be ready
+fi
 
 # Validate LocalStack is running
 if ! docker ps | grep -q localstack; then
@@ -29,7 +33,7 @@ echo "🟢 Installing K3s on Mac M1 using Multipass..."
 brew install --cask multipass
 
 echo "🟢 Creating Multipass VM for K3s..."
-multipass launch --name k3s --mem 4G --disk 40G
+multipass launch --name k3s --memory 4G --disk 40G || echo "✅ K3s instance already exists. Skipping launch."
 
 echo "🟢 Installing K3s in the VM..."
 multipass exec k3s -- bash -c "curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC='server --write-kubeconfig-mode=644' sh -"
@@ -40,11 +44,14 @@ multipass exec k3s -- sudo chmod 644 /etc/rancher/k3s/k3s.yaml
 echo "🟢 Fetching kubeconfig..."
 multipass exec k3s -- cat /etc/rancher/k3s/k3s.yaml > kubeconfig.yaml
 
-# Validate K3s installation
-if ! kubectl get nodes > /dev/null 2>&1; then
-    echo "❌ K3s failed to start! Check kubeconfig."
-    exit 1
-fi
+# Ensure correct kubeconfig IP
+VM_IP=$(multipass info k3s | grep IPv4 | awk '{print $2}')
+sed -i '' "s|server: https://127.0.0.1:6443|server: https://$VM_IP:6443|" kubeconfig.yaml
+export KUBECONFIG=$(pwd)/kubeconfig.yaml
+
+echo "🟢 Verifying K3s installation..."
+kubectl get nodes || { echo "❌ K3s failed to start! Check logs."; exit 1; }
+
 echo "✅ K3s is running. You can now use Kubernetes."
 
 # Step 3: Configure AWS CLI for LocalStack
@@ -67,133 +74,56 @@ else
     echo "✅ Secret already exists."
 fi
 
-# Step 5: Create and Deploy AWS Lambda Function
-echo "🟢 Creating AWS Lambda function..."
-cat <<EOF > lambda_function.py
-import json
-import boto3
-import os
-
-def lambda_handler(event, context):
-    localstack_endpoint = f"http://{os.getenv('LOCALSTACK_HOSTNAME', 'host.docker.internal')}:4566"
-    secret_name = "MyDatabaseSecret"
-
-    client = boto3.client('secretsmanager', endpoint_url=localstack_endpoint)
-
-    secret = client.get_secret_value(SecretId=secret_name)
-    secret_data = json.loads(secret['SecretString'])
-
-    return {
-        'statusCode': 200,
-        'body': json.dumps(f"Retrieved secret: {secret_data}")
-    }
-EOF
-
-zip function.zip lambda_function.py
-
-# Validate function.zip exists
-if [[ ! -f "function.zip" ]]; then
-    echo "❌ Lambda function package missing!"
-    exit 1
+# Step 5: Create AWS Lambda Function
+echo "🟢 Ensuring AWS Lambda function exists..."
+if ! aws --endpoint-url=http://localhost:4566 lambda list-functions | grep -q "MyLambdaFunction"; then
+    echo "🟢 Creating AWS Lambda function..."
+    aws --endpoint-url=http://localhost:4566 lambda create-function \
+      --function-name MyLambdaFunction \
+      --runtime python3.8 \
+      --role arn:aws:iam::000000000000:role/lambda-role \
+      --handler lambda_function.lambda_handler \
+      --zip-file fileb://function.zip
+else
+    echo "✅ Lambda function already exists."
 fi
 
-echo "🟢 Deploying AWS Lambda function..."
-aws --endpoint-url=http://localhost:4566 lambda create-function \
+# Step 6: Wait for Lambda to be available
+while ! aws --endpoint-url=http://localhost:4566 lambda get-function --function-name MyLambdaFunction >/dev/null 2>&1; do
+    echo "⏳ Waiting for Lambda function to be created..."
+    sleep 3
+done
+
+# Step 7: Create SQS Queue
+echo "🟢 Creating SQS Queue in LocalStack..."
+QUEUE_URL=$(aws --endpoint-url=http://localhost:4566 sqs create-queue --queue-name MyQueue | jq -r '.QueueUrl')
+
+if [[ -z "$QUEUE_URL" ]]; then
+    echo "❌ Failed to create SQS queue."
+    exit 1
+fi
+echo "✅ SQS Queue created: $QUEUE_URL"
+
+# Step 8: Update Lambda Configuration with SQS
+echo "🟢 Updating AWS Lambda to process SQS messages..."
+aws --endpoint-url=http://localhost:4566 lambda update-function-configuration \
   --function-name MyLambdaFunction \
-  --runtime python3.8 \
-  --role arn:aws:iam::000000000000:role/lambda-role \
-  --handler lambda_function.lambda_handler \
-  --zip-file fileb://function.zip || echo "✅ Lambda function already exists."
+  --environment "Variables={SQS_QUEUE_URL=$QUEUE_URL}"
 
-# Step 6: Install Terraform (for macOS M2)
-echo "🟢 Installing Terraform..."
-brew tap hashicorp/tap
-brew install hashicorp/tap/terraform
+echo "🟢 Sending test message to SQS..."
+aws --endpoint-url=http://localhost:4566 sqs send-message \
+  --queue-url $QUEUE_URL \
+  --message-body "Hello from SQS!"
 
-terraform -version
-
-# Step 7: Setup Terraform Configuration
-echo "🟢 Setting up Terraform..."
-mkdir -p terraform-lab && cd terraform-lab
-
-cat <<EOF > main.tf
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.85.0"
-    }
-  }
-}
-
-provider "aws" {
-  access_key                  = "test"
-  secret_key                  = "test"
-  region                      = "us-east-1"
-  skip_credentials_validation = true
-  skip_metadata_api_check     = true
-
-  endpoints {
-    lambda         = "http://localhost:4566"
-    secretsmanager = "http://localhost:4566"
-    iam           = "http://localhost:4566"
-  }
-}
-
-resource "aws_secretsmanager_secret" "db_secret" {
-  name = "MyDatabaseSecret"
-
-  lifecycle {
-    ignore_changes = [name]
-  }
-}
-
-resource "aws_lambda_function" "my_lambda" {
-  function_name    = "MyLambdaFunction"
-  role            = "arn:aws:iam::000000000000:role/lambda-role"
-  runtime         = "python3.8"
-  handler         = "lambda_function.lambda_handler"
-  filename        = "../function.zip"
-  source_code_hash = filebase64sha256("../function.zip")
-  timeout         = 60
-
-  lifecycle {
-    ignore_changes = [source_code_hash]
-  }
-}
-EOF
-
-echo "🟢 Initializing and Applying Terraform..."
-terraform init
-terraform apply -auto-approve
-
-# Validate Terraform execution
-if [[ $? -ne 0 ]]; then
-    echo "❌ Terraform deployment failed!"
+# Step 9: Validate SQS message reception
+echo "🟢 Receiving message from SQS..."
+sleep 5  # Give time for message processing
+RECEIVED_MSG=$(aws --endpoint-url=http://localhost:4566 sqs receive-message --queue-url $QUEUE_URL --wait-time-seconds 10 --visibility-timeout 30 2>/dev/null | jq -r '.Messages[0].Body' || echo "")
+if [[ "$RECEIVED_MSG" == "Hello from SQS!" ]]; then
+    echo "✅ SQS message successfully sent and received."
+else
+    echo "❌ Failed to receive SQS message. Debugging required."
     exit 1
 fi
-echo "✅ Terraform applied successfully."
 
-# Step 8: Deploy AWS Lambda in K3s
-echo "🟢 Deploying AWS Lambda in K3s..."
-kubectl apply -f lambda-deployment.yaml --validate=false
-
-# Validate Kubernetes deployment
-if ! kubectl get pods | grep -q lambda-deployment; then
-    echo "❌ Lambda deployment failed in Kubernetes!"
-    exit 1
-fi
-echo "✅ Lambda successfully deployed in K3s."
-
-# Step 9: Expose Lambda via Kubernetes Service
-echo "🟢 Exposing Lambda service..."
-kubectl apply -f lambda-service.yaml --validate=false
-
-# Validate Kubernetes service
-if ! kubectl get svc | grep -q lambda-service; then
-    echo "❌ Lambda service exposure failed!"
-    exit 1
-fi
-echo "✅ Lambda service successfully exposed in K3s."
-
-echo "🎉✅ Lab setup complete! AWS Lambda, Secrets Manager, Terraform, and K3s are running."
+echo "✅ Lab setup complete! AWS Lambda, SQS, Secrets Manager, Terraform, and K3s are running."

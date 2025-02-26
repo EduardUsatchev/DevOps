@@ -15,4 +15,19 @@ devops_program/l_14_15_terraform/lesson_14/tf-demo/ex2/dev/my-new-service-terru/
 .terragrunt-cache/
 docker/entrypoint_dockerfile/db_data/*
 .DS_Store
-terraform/
+# Ignore all .terraform directories
+**/.terraform/
+
+# Ignore Terraform state files
+*.tfstate
+*.tfstate.backup
+
+# Ignore Terraform plan files
+*.tfplan
+
+# Ignore sensitive variable files
+*.tfvars
+*.tfvars.json
+
+# Ignore provider cache
+.terraform.lock.hcl
