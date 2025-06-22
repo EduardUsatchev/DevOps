@@ -10,3 +10,9 @@ module "ec2" {
   subnet_id = aws_subnet.main.id
   instance_type = "t2.micro"
 }
+
+provider "aws" {
+  region     = "us-west-2"
+  access_key = data.vault_generic_secret.aws_credentials.data["access_key"]
+  secret_key = data.vault_generic_secret.aws_credentials.data["secret_key"]
+}

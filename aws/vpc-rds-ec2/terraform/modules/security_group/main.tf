@@ -1,5 +1,5 @@
 resource "aws_security_group" "main_sg" {
-  name        = "main-security-group"
+  name        = "main-security-group-1"
   description = "Security group for EC2 instances"
   vpc_id      = var.vpc_id  # ✅ Ensure this is set correctly
 

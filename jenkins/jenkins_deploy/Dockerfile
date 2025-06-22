@@ -12,7 +12,8 @@ ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 
 # Install necessary packages
 RUN apt-get update --fix-missing \
-    && apt-get install -qqy apt-transport-https ca-certificates curl dnsutils gnupg2 software-properties-common python3
+    && apt-get install -qqy apt-transport-https ca-certificates curl dnsutils gnupg2 software-properties-common python3 python3-pip
+
 # Create a symlink to ensure `python` points to `python3`
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
@@ -48,7 +49,7 @@ COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
 
 # Switch back to Jenkins user
-USER jenkins
+USER root
 
 # Set entrypoint
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
