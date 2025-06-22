@@ -1,0 +1,33 @@
+Starting Terraform Deployment for Environment: dev
+docker: Error response from daemon: Conflict. The container name "/localstack" is already in use by container "5df1066125dcc0440057f26a9c0c017006470b66d09a8c3d5182bb1b3d179dec". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+Waiting for LocalStack to be ready...
+Starting Terraform Deployment for Environment: dev
+docker: Error response from daemon: Conflict. The container name "/localstack" is already in use by container "5df1066125dcc0440057f26a9c0c017006470b66d09a8c3d5182bb1b3d179dec". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+Waiting for LocalStack to be ready...
+[0m[1mTerraform initialized in an empty directory![0m
+
+The directory has no Terraform configuration files. You may begin working
+with Terraform immediately by creating Terraform configuration files.[0m
+[0m[32m[1mCreated and switched to workspace "dev"![0m[32m
+
+You're now on a new, empty workspace. Workspaces isolate their state,
+so if you run "terraform plan" Terraform will not see any existing state
+for this configuration.[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mFailed to read variables file[0m
+[31m│[0m [0m
+[31m│[0m [0m[0mGiven variables file envs/dev.tfvars does not exist.
+[31m╵[0m[0m
+Terraform deployment for dev completed.
+e45cbf296ee3a067028d78a39f08f8d4e838d4b37025ec3d8f9d4fb5a806975b
+docker: Error response from daemon: driver failed programming external connectivity on endpoint mysql-dev (29ccfb97c3f60158c9ea2227f41498f1eadce8cf1161f88abe3d1d18b5e61a51): Bind for 0.0.0.0:3306 failed: port is already allocated.
+Started MySQL Docker Container for Dev
+Deployment log saved to deployment_dev.log
+Starting Terraform Deployment for Environment: dev
+LocalStack is already running.
+Error: Terraform main.tf not found. Run the script from the terraform directory.
+Starting Terraform Deployment for Environment: dev
+LocalStack is already running.
+Error: Terraform main.tf not found in /Users/e0u00jg/Desktop/Screenshots/Devops/aws/vpc-rds-ec2/terraform/../terraform. Ensure you have the correct Terraform structure.
