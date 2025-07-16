@@ -20,3 +20,4 @@ kubectl describe replicaset hello-node-589b6f6bb9
 kubectl describe deployment hello-node
 kubectl set image deployment/hello-node nginx=nginx:stable-alpine3.20
 kubectl get pods -l app=hello-node
+kubectl config set-context --current --namespace=default
