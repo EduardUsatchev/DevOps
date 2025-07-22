@@ -1,3 +1,4 @@
+# Deployment + service
 https://kubernetes.io/
 http://kubernetes.io/docs/reference/kubectl/generated/kubectl_completion/
 kubectl create deployment hello-node --image=nginx:1.15.12-alpine
@@ -19,6 +20,8 @@ https://kubernetes.io/docs/reference/kubectl/generated/kubectl_completion/
 kubectl expose deploy/hello-node --type LoadBalancer --port 80
 kubectl delete pod nginx
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/pod-with-service.yaml
+
+#CronJob
 https://crontab.guru/
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/guestbook/cronjob.yaml
 curl https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/guestbook/cronjob.yaml
@@ -36,7 +39,7 @@ kubectl get cronjobs.batch -n or
 kubectl get pods -n or
 history | tail -n30 | awk '{$1=""; print substr($0,2)}' | grep -v '^history'
 
-
+#Storage
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/pv.yaml
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/pvc.yaml
 curl https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/pvc.yaml
