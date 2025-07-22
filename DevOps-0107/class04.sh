@@ -23,6 +23,20 @@ https://crontab.guru/
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/guestbook/cronjob.yaml
 curl https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/guestbook/cronjob.yaml
 kubectl get pods 
+https://www.fluentd.org/
+curl https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/guestbook/cronjob.yaml
+kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/guestbook/cronjob.yaml
+kubectl get cronjob
+kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/guestbook/cronjob.yaml -n or
+kubectl create ns or
+kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/guestbook/cronjob.yaml -n or
+kubectl get pod -n or
+kubectl get cronjobs.batch
+kubectl get cronjobs.batch -n or
+kubectl get pods -n or
+history | tail -n30 | awk '{$1=""; print substr($0,2)}' | grep -v '^history'
+
+
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/pv.yaml
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/pvc.yaml
 kubectl describe persistentvolumeclaim/task-pv-claim
