@@ -7,8 +7,11 @@ kubectl get pods -l app=hello-node
 kubectl describe svc hello-node
 kubectl expose deploy/hello-node --type NodePort --port 80
 kubectl get svc hello-node -o yaml
-
+kubectl patch svc hello-node -p '{"spec": {"type": "ClusterIP"}}'
+ kubectl edit svc hello-node
+ 
 https://kubernetes.io/docs/reference/kubectl/generated/kubectl_completion/
+
 kubectl expose deploy/hello-node --type LoadBalancer --port 80
 kubectl delete pod nginx
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/pod-with-service.yaml
