@@ -29,6 +29,7 @@ kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/pod-with-secret.yaml
 https://github.com/bitnami-labs/sealed-secrets
 https://www.akeyless.io/
+https://www.hashicorp.com/en/products/vault
 kubectl delete -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/statefulset.yaml
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/statefulset.yaml
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/daemonset.yaml
