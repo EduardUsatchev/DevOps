@@ -27,6 +27,7 @@ exit
 kubectl describe configmap game-config
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/secret.yaml
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/pod-with-secret.yaml
+https://github.com/bitnami-labs/sealed-secrets
 kubectl delete -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/statefulset.yaml
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/statefulset.yaml
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/daemonset.yaml
