@@ -31,6 +31,7 @@ https://github.com/bitnami-labs/sealed-secrets
 https://www.akeyless.io/
 https://www.hashicorp.com/en/products/vault
 https://external-secrets.io/latest/
+https://fluxcd.io/flux/guides/mozilla-sops/
 kubectl delete -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/statefulset.yaml
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/statefulset.yaml
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/daemonset.yaml
