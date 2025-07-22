@@ -21,7 +21,7 @@ kubectl delete pod nginx
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/pod-with-service.yaml
 https://crontab.guru/
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/guestbook/cronjob.yaml
-
+curl https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/guestbook/cronjob.yaml
 kubectl get pods 
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/pv.yaml
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/pvc.yaml
