@@ -39,6 +39,7 @@ history | tail -n30 | awk '{$1=""; print substr($0,2)}' | grep -v '^history'
 
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/pv.yaml
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/pvc.yaml
+curl https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/pvc.yaml
 kubectl describe persistentvolumeclaim/task-pv-claim
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/pod-with-pvc.yaml
 kubectl exec -it task-pv-pod -- bash
