@@ -8,7 +8,8 @@ kubectl describe svc hello-node
 kubectl expose deploy/hello-node --type NodePort --port 80
 kubectl get svc hello-node -o yaml
 kubectl patch svc hello-node -p '{"spec": {"type": "ClusterIP"}}'
- kubectl edit svc hello-node
+kubectl edit svc hello-node
+https://www.pulumi.com/
  
 https://kubernetes.io/docs/reference/kubectl/generated/kubectl_completion/
 
