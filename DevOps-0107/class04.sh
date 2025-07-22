@@ -3,6 +3,8 @@ http://kubernetes.io/docs/reference/kubectl/generated/kubectl_completion/
 kubectl create deployment hello-node --image=nginx:1.15.12-alpine
 kubectl expose deploy/hello-node --type CLusterIP --port 80
 kubectl get svc
+kubectl get pods -l app=hello-node
+kubectl describe svc hello-node
 kubectl expose deploy/hello-node --type NodePort --port 80
 
 https://kubernetes.io/docs/reference/kubectl/generated/kubectl_completion/
