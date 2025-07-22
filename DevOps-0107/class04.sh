@@ -50,7 +50,9 @@ kubectl exec -it task-pv-pod -- bash
 cd usr/share/nginx/html/
 echo 1 > index.html
 exit
+#Re-Run AT HOME
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/pod-with-retain-deployment.yaml
+
 kubectl debug node/docker-desktop -it --image=busybox -- sh
 kubectl delete -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/pod-with-pvc.yaml
 kubectl apply -f https://raw.githubusercontent.com/EduardUsatchev/k8s-demo/refs/heads/master/volumes/pod-with-pvc.yaml
