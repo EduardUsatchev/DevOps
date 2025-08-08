@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: superset-config
+data:
+  superset_config.py: |
+    SECRET_KEY = 'vwAw8q196ysnpTsTh4SrsyO3Ik9bxY90FJRa7it8PCgyUVe/1I+TL+Cn'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:////app/superset_home/superset.db'
+

@@ -29,7 +29,7 @@ FROM python:${pythonVersion}-slim AS production
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-
+mkdir
 # Copy installed Python dependencies from build stage
 COPY --from=build /usr/local/lib/python3.9/site-packages/ /usr/local/lib/python3.9/site-packages/
 

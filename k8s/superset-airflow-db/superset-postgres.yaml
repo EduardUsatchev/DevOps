@@ -1,0 +1,91 @@
+# superset-postgres.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: superset-postgres-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: superset-postgres
+spec:
+  ports:
+    - port: 5432
+  selector:
+    app: superset-postgres
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: superset-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: superset-postgres
+  template:
+    metadata:
+      labels:
+        app: superset-postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:14
+        env:
+        - name: POSTGRES_DB
+          value: superset
+        - name: POSTGRES_USER
+          value: superset
+        - name: POSTGRES_PASSWORD
+          value: superset
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - name: superset-pgdata
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: superset-pgdata
+        persistentVolumeClaim:
+          claimName: superset-postgres-pvc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: superset
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: superset
+  template:
+    metadata:
+      labels:
+        app: superset
+    spec:
+      containers:
+      - name: superset
+        image: amancevice/superset:latest
+        env:
+        - name: SUPERSET_DATABASE_URI
+          value: postgresql://superset:superset@superset-postgres:5432/superset
+        ports:
+        - containerPort: 8088
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: superset
+spec:
+  type: NodePort
+  ports:
+  - port: 8088
+    targetPort: 8088
+    nodePort: 30088
+  selector:
+    app: superset

@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: superset
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: superset
+  template:
+    metadata:
+      labels:
+        app: superset
+    spec:
+      initContainers:
+        - name: init-sqlite-dir
+          image: busybox
+          command: [ 'sh', '-c', 'mkdir -p /app/superset_home && chmod 777 /app/superset_home' ]
+          volumeMounts:
+            - name: superset-sqlite-data
+              mountPath: /app/superset_home
+      containers:
+        - name: superset
+          image: amancevice/superset:4.1.2
+          ports:
+            - containerPort: 8088
+          env:
+            - name: SUPERSET_SECRET_KEY
+              value: 'vM3bDiCspr6l5w6IwIHKyLentGAla93PfM4au0I0QN6u/1krxff62wp8'
+            - name: SQLALCHEMY_DATABASE_URI
+              value: 'sqlite:////app/superset_home/superset.db'
+          volumeMounts:
+            - name: superset-sqlite-data
+              mountPath: /app/superset_home
+      volumes:
+        - name: superset-sqlite-data
+          persistentVolumeClaim:
+            claimName: superset-sqlite-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: superset
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8088
+      targetPort: 8088
+      nodePort: 30088
+  selector:
+    app: superset
