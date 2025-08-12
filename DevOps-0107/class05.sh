@@ -30,7 +30,7 @@ to
 version: 0.2.0
 
 helm upgrade -i adamapp oci://registry-1.docker.io/adamlor/mychart --set replicaCount=1
-
+tar xvzf mychart-0.1.0.tgz
 helm fetch --untar  oci://registry-1.docker.io/adamlor/mychart
 helm history adamapp
 helm rollback adamapp
