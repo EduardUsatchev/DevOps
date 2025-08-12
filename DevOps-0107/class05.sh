@@ -43,7 +43,12 @@ https://artifacthub.io/
 
 
 helm uninstall adamapp my-release
-Chart.yaml 
+helm lint mychart
+
+helm diff revision myrelease 1 4
+helm install my-release oci://registry-1.docker.io/bitnamicharts/redis
+
+Chart.yaml
 ###########################################
 apiVersion: v2
 appVersion: 1.16.0
@@ -55,3 +60,30 @@ dependencies:
   - name: redis
     version: 20.11.4
     repository: oci://registry-1.docker.io/bitnamicharts
+###########################################
+
+helm dep build
+
+#Useful
+helm search hub redis             # Search Artifact Hub for charts
+helm search repo mychart          # Search local repos for a chart
+helm show all mychart              # Show chart details (values, templates, README)
+helm show values mychart           # Show only values.yaml from a chart
+helm show chart mychart            # Show only Chart.yaml
+helm dep update                    # Update dependencies in charts/ dir
+helm dep list                      # List dependencies of a chart
+helm install myrelease ./mychart --dry-run --debug   # Simulate install
+helm template mychart ./ --debug                     # Render manifests
+helm get notes myrelease                             # Show NOTES.txt output
+helm upgrade myrelease ./mychart --set image.tag=1.21.0   # Override single value
+helm upgrade myrelease ./mychart -f custom-values.yaml    # Override multiple
+helm get values myrelease                                 # Show overridden values
+helm get values myrelease --all                           # Show all values (incl. defaults)
+helm history myrelease                 # Show release history
+helm rollback myrelease 2              # Roll back to revision 2
+helm status myrelease                   # Show status & resources
+helm diff revision myrelease 3 5
+helm uninstall myrelease           # Remove release
+helm uninstall myrelease --keep-history  # Remove but keep history
+helm repo remove bitnami            # Remove repo
+helm repo list                      # List repos
