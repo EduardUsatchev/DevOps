@@ -25,3 +25,4 @@ git log
 ls -la
 ls -la .git
 git log
+https://github.com/EduardUsatchev/class6-git
