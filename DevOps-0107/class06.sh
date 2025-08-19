@@ -26,3 +26,5 @@ ls -la
 ls -la .git
 git log
 https://github.com/EduardUsatchev/class6-git
+git checkout -b new-branch
+git checkout main
