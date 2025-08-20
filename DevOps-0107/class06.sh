@@ -128,6 +128,12 @@ Git commit -am “34rd commit”
 git merge new-branch
 Cat a.txt
 
-
+#############################
+Additional:
+Full git explanation and introduction - https://wyag.thb.lt
+Oh shit git - https://ohshitgit.com/
+Commit messages guide - https://github.com/RomuloOliveira/commit-messages-guide
+https://git-rebase.io
+More productive git - https://increment.com/open-source/more-productive-git/
 
 
