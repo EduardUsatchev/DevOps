@@ -55,3 +55,4 @@ COPY app.py .
 
 # Run the app
 CMD ["python", "app.py"]
+# https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#jobsjob_idstrategymatrixinclude
