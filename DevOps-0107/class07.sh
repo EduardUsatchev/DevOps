@@ -20,4 +20,5 @@ jobs:
         run: |
           ls -ltr
           python --version
-#####################################3
+#####################################
+# https://github.com/EduardUsatchev/class-7/settings/actions/runners
