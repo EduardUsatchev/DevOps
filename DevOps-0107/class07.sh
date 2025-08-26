@@ -28,3 +28,4 @@ jobs:
 
 # https://github.com/EduardUsatchev/DevOps/blob/main/github-actions/workflows/seq-and-para.yaml
 # https://github.com/EduardUsatchev/DevOps/blob/main/github-actions/workflows/secrets.yaml
+# http://github.com/EduardUsatchev/DevOps/blob/main/github-actions/workflows/matrix.yaml
