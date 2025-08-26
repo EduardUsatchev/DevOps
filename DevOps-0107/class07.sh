@@ -21,4 +21,4 @@ jobs:
           ls -ltr
           python --version
 #####################################
-# https://github.com/EduardUsatchev/class-7/settings/actions/runners
+# https://github.com/EduardUsatchev/class-7/settings/actions/runners | per repo: settings/actions/runners
