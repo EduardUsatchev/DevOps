@@ -61,3 +61,14 @@ CMD ["python", "app.py"]
 
 ##########################################################################################
 https://github.com/EduardUsatchev/DevOps/blob/main/github-actions/workflows/docker-build-push.yaml
+Add file: app.py
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Hello from GitHub Actions + Docker!"
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
+######    ######
