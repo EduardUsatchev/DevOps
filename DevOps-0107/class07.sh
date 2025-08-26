@@ -25,3 +25,5 @@ jobs:
 # https://docs.github.com/en/billing/concepts/product-billing/github-actions
 # https://github.com/actions/runner-images
 # Dont forget to DISABLE unused workflows !!
+
+# https://github.com/EduardUsatchev/DevOps/blob/main/github-actions/workflows/seq-and-para.yaml
