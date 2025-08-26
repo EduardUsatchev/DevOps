@@ -1,0 +1,20 @@
+name: Run Tests
+
+on:
+  push:
+    branches:
+        - main
+        - master
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: python:3.11
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: show files
+        run: |
+          ls -ltr
+          python --version
