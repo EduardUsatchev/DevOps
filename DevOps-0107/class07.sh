@@ -22,3 +22,4 @@ jobs:
           python --version
 #####################################
 # https://github.com/EduardUsatchev/class-7/settings/actions/runners | per repo: settings/actions/runners
+# https://docs.github.com/en/billing/concepts/product-billing/github-actions
