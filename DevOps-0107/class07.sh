@@ -25,7 +25,33 @@ jobs:
 # https://docs.github.com/en/billing/concepts/product-billing/github-actions
 # https://github.com/actions/runner-images
 # Dont forget to DISABLE unused workflows !!
-
+######################################################################################################
 # https://github.com/EduardUsatchev/DevOps/blob/main/github-actions/workflows/seq-and-para.yaml
+######################################################################################################
 # https://github.com/EduardUsatchev/DevOps/blob/main/github-actions/workflows/secrets.yaml
+##########################################################################################
 # http://github.com/EduardUsatchev/DevOps/blob/main/github-actions/workflows/matrix.yaml | settings/secrets/actions
+1. requirements.txt:
+flask
+pytest
+##############################
+2.New file called: test_sample.py
+def test_one_equals_one():
+    assert 1 == 1
+##########################################
+3. Dockerfile:
+# Use an official Python runtime
+FROM python:3.11-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# Copy source code
+COPY app.py .
+
+# Run the app
+CMD ["python", "app.py"]
