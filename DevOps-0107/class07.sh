@@ -24,3 +24,4 @@ jobs:
 # https://github.com/EduardUsatchev/class-7/settings/actions/runners | per repo: settings/actions/runners
 # https://docs.github.com/en/billing/concepts/product-billing/github-actions
 # https://github.com/actions/runner-images
+# Dont forget to DISABLE unused workflows !!
