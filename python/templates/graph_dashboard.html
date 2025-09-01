@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Graph Dashboard - Earthquake Dashboard{% endblock %}
+{% block content %}
+<h1 class="mb-4">Earthquake Graph Dashboard</h1>
+<form class="row g-3 mb-4" method="get" action="{{ url_for('dashboard.graph_earthquakes_page') }}">
+  <div class="col-md-6">
+    <label for="location" class="form-label">Select Country/Region:</label>
+    <select class="form-select" name="location" id="location">
+      {% for country in countries %}
+        <option value="{{ country }}" {% if country == current_location %}selected{% endif %}>{{ country }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label for="days" class="form-label">Select History (Days):</label>
+    <select class="form-select" name="days" id="days">
+      <option value="10" {% if days == 10 %}selected{% endif %}>Last 10 Days</option>
+      <option value="30" {% if days == 30 %}selected{% endif %}>Last 30 Days</option>
+      <option value="90" {% if days == 90 %}selected{% endif %}>Last 90 Days</option>
+    </select>
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Update</button>
+  </div>
+</form>
+
+<hr>
+<h2>Graph for Selected Region ({{ current_location }})</h2>
+<p>Showing data for last {{ days }} days</p>
+<div class="text-center mb-5">
+  <img src="{{ url_for('dashboard.graph_earthquakes_image') }}?days={{ days }}&location={{ current_location }}" alt="Earthquake Graph" class="img-fluid">
+</div>
+
+<hr>
+<h3>5-Year View for {{ current_location }}</h3>
+<div class="text-center mb-5">
+  <img src="{{ url_for('dashboard.graph_earthquakes_5years_image') }}?location={{ current_location }}" alt="5-Year Earthquake Graph" class="img-fluid">
+</div>
+
+<hr>
+<h2>Top 5 Earthquakes Worldwide (Last 30 Days)</h2>
+<ul class="list-group mb-5">
+  {% for event in top_events %}
+    <li class="list-group-item">
+      <strong>Magnitude {{ event.properties.mag }}</strong> at {{ event.properties.place }} -
+      <a href="{{ event.properties.url }}" target="_blank">Details</a>
+    </li>
+  {% endfor %}
+</ul>
+
+<hr>
+<h2>Last Earthquake Worldwide (Last 30 Days)</h2>
+{% if last_event %}
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Magnitude: {{ last_event.properties.mag }}</h5>
+      <p class="card-text">
+        <strong>Location:</strong> {{ last_event.properties.place }}<br>
+        <strong>Time:</strong> {{ last_event.properties.time | timestamp_to_str }}
+      </p>
+      <a href="{{ last_event.properties.url }}" class="btn btn-secondary" target="_blank">More Details</a>
+    </div>
+  </div>
+{% else %}
+  <p>No earthquake data available.</p>
+{% endif %}
+{% endblock %}

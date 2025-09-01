@@ -27,7 +27,7 @@ This section contains Ansible playbooks and configurations for automating infras
 
 ## Argo CD
 
-Directory: [argoCD/](./argoCD)
+Directory: [argoCD/](gitops/argoCD_)
 
 Argo CD is a declarative, GitOps continuous delivery tool for Kubernetes. This section includes configuration files and examples showing how to set up and manage Kubernetes applications using Argo CD.
 

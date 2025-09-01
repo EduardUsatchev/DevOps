@@ -1,0 +1,15 @@
+[Unit]
+Description=Hello Service that logs time every minute
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/hello_service.sh
+Restart=always
+User=root
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=hello_service
+
+[Install]
+WantedBy=multi-user.target
+

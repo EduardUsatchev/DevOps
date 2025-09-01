@@ -36,4 +36,4 @@ RUN mkdir -p /var/log/my-flask-app \
 USER app
 
 # Command to run the Flask application
-CMD ["flask", "run"]
+CMD ["python", "app.py"]

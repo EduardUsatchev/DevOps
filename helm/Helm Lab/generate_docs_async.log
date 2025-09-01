@@ -1,0 +1,20 @@
+2025-02-26 16:39:04,289 [INFO] Starting documentation generation in: .
+2025-02-26 16:39:08,857 [INFO] message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=3790 request_id=req_e73a6d6a743340bb9bfb2eca31bf17c3 response_code=200
+2025-02-26 16:39:08,873 [INFO] Generated root-level project overview.
+2025-02-26 16:39:08,874 [INFO] Found 8 files to process.
+2025-02-26 16:39:08,944 [INFO] Skipping non-text file: Dockerfile
+2025-02-26 16:39:08,944 [INFO] Skipping non-text file: generate_docs_async.log
+2025-02-26 16:39:08,944 [INFO] Skipping non-text file: promote_chart_version.sh
+2025-02-26 16:39:08,944 [INFO] Skipping non-text file: setup_k8s_helm.sh
+2025-02-26 16:39:08,944 [INFO] Skipping non-text file: promote_both_versions.sh
+2025-02-26 16:39:08,944 [INFO] Skipping non-text file: promote_app_version.sh
+2025-02-26 16:39:10,678 [INFO] message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=1497 request_id=req_9a1dc41ae5472a892d2a046b31f5db8d response_code=200
+2025-02-26 16:39:10,680 [INFO] Generated documentation for requirements.txt
+2025-02-26 16:39:11,594 [INFO] message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=2419 request_id=req_bea104ffad36bffa4ebbd154d0bb4626 response_code=200
+2025-02-26 16:39:11,613 [INFO] Generated documentation for app.py
+2025-02-26 16:39:11,614 [INFO] Documentation generation complete.
+2025-02-26 16:39:11,614 [INFO] Summary Report:
+2025-02-26 16:39:11,614 [INFO]   Folders processed: 2
+2025-02-26 16:39:11,614 [INFO]   Files processed: 8
+2025-02-26 16:39:11,614 [INFO]   Errors encountered: 0
+2025-02-26 16:39:11,614 [INFO]   Total token usage: 1478
