@@ -39,7 +39,7 @@ spec:
       prune: true
       selfHeal: true
 
-
+https://github.com/yannh/kubeconform
 
 https://github.com/EduardUsatchev/class-argocd/tree/main
 
