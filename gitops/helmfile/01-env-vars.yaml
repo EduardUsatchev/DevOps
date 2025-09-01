@@ -1,0 +1,11 @@
+repositories:
+  - name: cloudposse-incubator
+    url: https://charts.cloudposse.com/incubator/
+
+releases:
+{{ if eq (env "SUPERSET") "YES" }}
+- name: superset
+  namespace: default
+  chart: cloudposse-incubator/superset
+{{ end }}
+

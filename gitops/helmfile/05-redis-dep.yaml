@@ -1,0 +1,14 @@
+repositories:
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+    username: ""
+    password: ""
+releases:
+- name: redis
+  namespace: default
+  chart: bitnami/redis
+  values:
+    - redis-values.yaml
+    - cluster:
+        slaveCount: {{ env "SLAVE_COUNT" | default "1" }}
+    - password: {{ .Values.password }}
