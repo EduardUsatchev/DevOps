@@ -8,13 +8,13 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String((kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath='{.data.password}')))
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 
-create new repo called: 2402-argocd
+create new repo called: class-argocd
 https://github.com/new
 add this: 
-https://github.com/avielb/2402-argocd/blob/main/example.yaml
-https://github.com/avielb/2402-argocd/blob/main/svc.yaml
+https://github.com/EduardUsatchev/class-argocd/blob/main/example.yaml
+https://github.com/EduardUsatchev/class-argocd/blob/main/svc.yaml
 
-https://github.com/avielb/advanced-devops.git
+https://github.com/EduardUsatchev/advanced-devops.git
 ./gitops/argocd/mychart
 
 
@@ -25,7 +25,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/avielb/advanced-devops.git
+    repoURL: https://github.com/EduardUsatchev/advanced-devops.git
     path: gitops/argocd/mychart
     targetRevision: HEAD
     helm:
@@ -41,7 +41,7 @@ spec:
 
 
 
-https://github.com/avielb/2402-argocd/tree/main
+https://github.com/EduardUsatchev/class-argocd/tree/main
 
 https://app.docker.com/settings/personal-access-tokens/create - Read, Write, Delete
 
@@ -56,7 +56,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/avielb/2402-argocd.git
+    repoURL: https://github.com/EduardUsatchev/class-argocd.git
     path: mychart
     targetRevision: HEAD
     helm:
