@@ -67,7 +67,10 @@ spec:
     server: https://kubernetes.default.svc
     namespace: default
   syncPolicy:
-
+    automated:
+      prune: true
+      selfHeal: true
+  
 ########3
  flux bootstrap github \
   --owner=$GITHUB_USER \
@@ -75,6 +78,3 @@ spec:
   --branch=main \
   --path=./gitops/flux/docker-desktop \
   --personal
-    automated:
-      prune: true
-      selfHeal: true
