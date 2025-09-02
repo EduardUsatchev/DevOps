@@ -71,6 +71,7 @@ spec:
     automated:
       prune: true
       selfHeal: true
+
   
 ########3
  flux bootstrap github \
