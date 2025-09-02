@@ -1,8 +1,117 @@
-1. kubectl create namespace argocd
-2. kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-3. kubectl get all -n argocd
-4. kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
-5. kubectl port-forward svc/argocd-server -n argocd 8080:443
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl get all -n argocd
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" -n argocd| base64 -d; echo
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+argocd app create static-site \
+  --repo https://github.com/avielb/advanced-devops.git \
+  --path ./gitops/argocd/new \
+  --dest-server https://kubernetes.default.svc \
+  --dest-namespace default
+
+# syncPolicies - manual, automated
+---------------------------------
+# create kubernetes yamls in everyone's git repo - create folder argocd/yamls, in it put `gitops/argocd/new`
+# commit and push
+# create application in UI
+# look at the created resource
+# update yamls in repo for replicas and sync
 
 
 
+
+#############################################
+# Full CI/CD EXAMPLE
+#############################################
+Create docker image and push to dockerhub
+### in the git repo add:
+app.py:
+```
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Hello from GitHub Actions + Docker!"
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
+```
+
+requirements.txt:
+```
+flask
+```
+
+Dockerfile:
+```
+# Use an official Python runtime
+FROM python:3.11-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# Copy source code
+COPY app.py .
+
+# Run the app
+CMD ["python", "app.py"]
+```
+
+#################################################
+# Create github workflow
+##############################################
+# workflow from docker-build.yaml
+# look at `platform`
+
+
+############################################
+# kubernetes deployment
+##########################################
+
+Helm chart
+----
+# talk about application and CRD
+helm create mychart in `gitops/argocd/`
+add values-image.yaml with:
+```
+image:
+  tag: v0.1
+```
+commit and push chart
+# create application in UI, commit the chart and push
+# add the following application yaml in the UI.
+```
+project: default
+source:
+  repoURL: https://github.com/avielb/2402-argocd.git
+  path: mychart
+  targetRevision: HEAD
+  helm:
+    valueFiles:
+      - values.yaml
+      - values-image.yaml
+destination:
+  server: https://kubernetes.default.svc
+  namespace: default
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
+```
+### in the git repo add:
+## add values-dev.yaml, values-prod.yaml
+## add the github workflow `docker-build.yaml`
+------------------------------------------------------
+export ZSH_AUTOSUGGEST_HISTORY_IGNORE=*
+export GITHUB_TOKEN=ghp_.....
+flux bootstrap github \                                                                                                                                                                                         (docker-desktop/default)
+  --owner=avielb \
+  --repository=advanced-devops \
+  --branch=master \
+  --path=./gitops/flux/docker-desktop \
+  --personal
