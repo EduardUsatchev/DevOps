@@ -15,8 +15,8 @@ add this:
 https://github.com/EduardUsatchev/class-argocd/blob/main/example.yaml
 https://github.com/EduardUsatchev/class-argocd/blob/main/svc.yaml
 
-https://github.com/EduardUsatchev/advanced-devops.git
-./gitops/argocd/mychart
+https://github.com/EduardUsatchev/class-argocd/mychart
+./mychart
 
 
 apiVersion: argoproj.io/v1alpha1
