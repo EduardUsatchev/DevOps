@@ -24,6 +24,10 @@ minikube start --driver=docker
 16. kubectl -n monitoring port-forward svc/prometheus-alertmanager 9093:9093
 17. kubectl -n monitoring port-forward svc/prometheus-prometheus-pushgateway 9091:9091
 
+promethus metrics: http://localhost:9090/metrics
+
+
+
 kubectl patch ds prometheus-prometheus-node-exporter --type "json" -p '[{"op": "remove", "path" : "/spec/template/spec/containers/0/volumeMounts/2/mountPropagation"}]' -n monitoring
 
 
