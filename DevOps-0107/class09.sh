@@ -1,4 +1,5 @@
 First: git clone https://github.com/EduardUsatchev/advanced-devops.git
+cd advanced-devops/monitoring/k8s-setup
 minikube start --driver=docker
 1. kubectl apply -f monitoring/namespace.yml
 2. helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
