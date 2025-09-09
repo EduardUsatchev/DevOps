@@ -1,3 +1,4 @@
+First: git clone https://github.com/EduardUsatchev/advanced-devops.git
 1. kubectl apply -f monitoring/namespace.yml
 2. helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 3. helm repo add kube-state-metrics https://kubernetes.github.io/kube-state-metrics
