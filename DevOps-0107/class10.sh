@@ -7,6 +7,7 @@ yum install docker -y
 systemctl enable docker
 systemctl start docker
 docker run -d -p 80:80 nginx:alpine
+curl localhost:80
 http://calculator.aws/
 docker rm -vf container-name
 https://k3s.io/
