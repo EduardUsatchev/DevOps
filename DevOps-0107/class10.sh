@@ -20,6 +20,44 @@ alias kubectl='k3s kubectl'
 kubectl apply -f https://raw.githubusercontent.com/avielb/advanced-devops/refs/heads/master/monitoring/nginx.yaml
 kubectl get pods 
 
+# 1. List all instances
+aws ec2 describe-instances \
+  --filters "Name=instance-state-name,Values=running,stopped" \
+  --query "Reservations[].Instances[].[InstanceId,State.Name,InstanceType,Tags[?Key=='Name']|[0].Value,PublicIpAddress]" \
+  --output table
+
+# 2. Launch a new EC2 instance
+aws ec2 run-instances \
+  --image-id ami-0123456789abcdef0 \
+  --count 1 \
+  --instance-type t3.medium \
+  --key-name my-keypair \
+  --security-group-ids sg-01234567 \
+  --subnet-id subnet-01234567 \
+  --associate-public-ip-address \
+  --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value="my-app-server"}]'
+
+# 3. Start stopped instance(s)
+aws ec2 start-instances --instance-ids i-0123456789abcdef0 i-0fedcba9876543210
+
+# 4. Stop running instance(s)
+aws ec2 stop-instances --instance-ids i-0123456789abcdef0
+
+# 5. Reboot instance
+aws ec2 reboot-instances --instance-ids i-0123456789abcdef0
+
+# 6. Terminate instance (destructive)
+aws ec2 terminate-instances --instance-ids i-0123456789abcdef0
+
+# 7. Create an AMI from an instance
+aws ec2 create-image \
+  --instance-id i-0123456789abcdef0 \
+  --name "my-instance-ami-$(date +%Y%m%d)" \
+  --no-reboot
+
+
+
+
 AmazonEC2FullAccess
 -----
 provider "aws" {
