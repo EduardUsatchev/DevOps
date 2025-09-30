@@ -1,3 +1,21 @@
+terraform init
+
+AmazonEC2FullAccess
+-----
+provider "aws" {
+  region = "us-east-1"
+}
+
+resource "aws_instance" "example" {
+  ami           = "ami-0953476d60561c955" # Amazon Linux 2 AMI
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "ExampleInstance"
+  }
+}
+
+
 # create folder in the pycharm project called "class11"
 provider "aws" {
   region = "us-east-1"
