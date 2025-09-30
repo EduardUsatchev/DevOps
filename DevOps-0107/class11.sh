@@ -1,5 +1,4 @@
-terraform init
-
+First create a file 
 AmazonEC2FullAccess
 -----
 provider "aws" {
@@ -7,14 +6,18 @@ provider "aws" {
 }
 
 resource "aws_instance" "example" {
-  ami           = "ami-0953476d60561c955" # Amazon Linux 2 AMI
+  ami           = "ami-08982f1c5bf93d976" # Amazon Linux 2 AMI
   instance_type = "t2.micro"
+  access_key = ""
+  secret_key = ""
 
   tags = {
     Name = "ExampleInstance"
   }
 }
-
+1. terraform init
+2. terraform plan -out plan.txt
+3. terraform apply plan.txt
 
 # create folder in the pycharm project called "class11"
 provider "aws" {
