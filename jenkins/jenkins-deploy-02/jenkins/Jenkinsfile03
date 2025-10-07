@@ -1,0 +1,10 @@
+properties([parameters([string(defaultValue: 'eduard', description: 'Enter Your Name:', name: 'NAME'), choice(choices: ['usw2', 'euc1', 'apse1', 'usw2'], description: 'Choose a region', name: 'REGION')]), pipelineTriggers([cron('* * * * *')])])
+node("edi"){
+    stage("one"){
+        echo "blalba"
+        sleep time: 10, unit: 'MILLISECONDS'
+    }
+    stage("two"){
+        sh "echo ${NAME}"
+    }
+}

@@ -1,0 +1,10 @@
+node{
+    stage("one"){
+        echo "hello world"
+    }
+    stage("two"){
+        echo "ByeBye"
+        sh "date"
+        bat "time /T"
+    }
+}
