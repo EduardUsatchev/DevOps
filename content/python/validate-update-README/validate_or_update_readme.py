@@ -17,7 +17,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        logging.FileHandler("generate_docs_async.log"),
+        logging.FileHandler("../../../generate_docs_async.log"),
         logging.StreamHandler()
     ]
 )

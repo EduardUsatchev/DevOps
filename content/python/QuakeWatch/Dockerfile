@@ -10,7 +10,7 @@ COPY requirements.txt /app/requirements.txt
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Copy project files
-COPY . /app
+COPY .. /app
 
 EXPOSE 5000
 
