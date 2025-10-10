@@ -1,8 +1,0 @@
-#insufficient-resources
-Debugging-Lab/insufficient-resources/fixed/** filter=git-crypt diff=git-crypt
-#pod-dependencies
-Debugging-Lab/pod-dependencies/fixed/** filter=git-crypt diff=git-crypt
-#pod-network
-
-#docker-dependencies
-docker/docker-dependencies/fixed/**

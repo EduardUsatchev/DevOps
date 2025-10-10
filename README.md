@@ -1,138 +1,193 @@
 
-# DevOps Repository
+---
 
-This repository serves as a comprehensive collection of DevOps-related projects, tools, and concepts. It covers a wide range of topics, including containerization, orchestration, CI/CD pipelines, infrastructure as code, cloud services, and monitoring.
+# 🧭 DevOps Repository
 
-## Table of Contents
+This repository is a comprehensive collection of **DevOps-related projects, scripts, labs, and educational materials**.
+It covers a wide range of topics including containerization, orchestration, CI/CD, Infrastructure as Code (IaC), cloud platforms, monitoring, and automation.
 
-1. [Ansible](#ansible)
-2. [Argo CD](#argo-cd)
-3. [AWS](#aws)
-4. [Cognyte DevOps Lab](#cognyte-devops-lab)
-5. [Debugging Lab](#debugging-lab)
-6. [DevOps Program](#devops-program)
-7. [Docker](#docker)
-8. [Encryption Key Management](#encryption-key-management)
-9. [Helm](#helm)
-10. [Jenkins](#jenkins)
-11. [Kubernetes (K8s)](#kubernetes-k8s)
-12. [Monitoring (Minikube Project)](#monitoring-minikube-project)
-13. [Terraform](#terraform)
+---
 
-## Ansible
+## 📚 Table of Contents
 
-Directory: [ansible/](./ansible)
+* [DevOps-0107 (Class Scripts)](#devops-0107-class-scripts)
+* [HomeAssignment Solutions](#homeassignment-solutions)
+* [Projects](#projects)
+* [Content](#content)
+* [Debugging Lab](#debugging-lab)
+* [DevOps Program](#devops-program)
+* [Encryption Key Management](#encryption-key-management)
+* [Getting Started](#getting-started)
+* [Prerequisites](#prerequisites)
+* [Contributing](#contributing)
+* [License](#license)
 
-This section contains Ansible playbooks and configurations for automating infrastructure setup and application deployments. The playbooks demonstrate tasks such as installing software packages, configuring services, and managing system states.
+---
 
-## Argo CD
+## 🧩 DevOps-0107 (Class Scripts)
 
-Directory: [argoCD/](gitops/argoCD_)
+**Directory:** `DevOps-0107/`
 
-Argo CD is a declarative, GitOps continuous delivery tool for Kubernetes. This section includes configuration files and examples showing how to set up and manage Kubernetes applications using Argo CD.
+Contains a series of **class session scripts** (`class01.sh` → `class15.sh`) used for hands-on demonstrations and automation exercises in the DevOps course.
+Each script represents a specific topic or lab (e.g., Git, Docker, Jenkins, Kubernetes, etc.).
 
-## AWS
+---
 
-Directory: [aws/](./aws)
+## 🧠 HomeAssignment Solutions
 
-This section includes various scripts, templates, and examples for automating and managing AWS cloud resources. Topics covered include EC2 instances, S3 storage, load balancing, and auto-scaling.
+**Directory:** `HomeAssignment Solutions/`
 
-## Cognyte DevOps Lab
+Includes practical homework solutions for each class:
 
-Directory: [cognyte_devops_lab/](./cognyte_devops_lab)
+* `Class 7` – Git & Jenkins
+* `Class 8` – Linux Fundamentals
+* `Class 9` – Docker
+* `Class 10` – Kubernetes & Helm
+* `Class 11` – Ansible
+* `Class 12` – Monitoring & Terraform
 
-Contains lab exercises and practical projects completed during the Cognyte DevOps program. These projects cover real-world scenarios and provide hands-on experience with DevOps tools and practices.
+Each folder contains completed exercises, YAML manifests, scripts, and example outputs.
 
-## Debugging Lab
+---
 
-Directory: [debugging_lab/](./debugging_lab)
+## 💼 Projects
 
-This section focuses on debugging techniques and exercises. It provides insights into identifying and fixing common issues in infrastructure and applications.
+**Directory:** `Projects/`
 
-## DevOps Program
+Contains **real-world DevOps projects** built during professional and training programs:
 
-Directory: [devops_program/](./devops_program)
+* `Cognyte` – Projects completed during the Cognyte DevOps Lab, covering advanced automation and CI/CD pipelines.
+* `Intel` – Hands-on projects focusing on infrastructure management, monitoring, and cloud-native deployments.
 
-Includes coursework and assignments from a structured DevOps training program. The content covers a wide range of DevOps topics, from basic concepts to advanced tools and practices.
+---
 
-## Docker
+## 🧱 Content
 
-Directory: [docker/](./docker)
+**Directory:** `content/`
 
-This section contains Dockerfiles and related resources for building and running containerized applications. It demonstrates best practices for containerization, including multi-stage builds and image optimization.
+This section serves as the **core knowledge base** for DevOps tools and practices, organized by technology:
 
-## Encryption Key Management
+| Topic             | Description                                                              |
+| ----------------- | ------------------------------------------------------------------------ |
+| `ansible/`        | Configuration management and automation playbooks.                       |
+| `aws/`            | Cloud automation scripts for EC2, S3, IAM, and networking.               |
+| `docker/`         | Containerization best practices and multi-stage Dockerfiles.             |
+| `git/`            | Git fundamentals, branching models, and workflows.                       |
+| `github-actions/` | CI/CD pipelines using GitHub Actions.                                    |
+| `gitops/`         | GitOps workflows using Argo CD and declarative deployment.               |
+| `helm/`           | Helm charts for Kubernetes applications.                                 |
+| `jenkins/`        | Jenkins pipelines for CI/CD automation.                                  |
+| `k8s/`            | Kubernetes manifests for deployments, services, and ConfigMaps.          |
+| `linux/`          | Linux command-line operations and shell scripting.                       |
+| `monitoring/`     | Monitoring setups using Prometheus and Grafana.                          |
+| `python/`         | Python examples for automation, APIs, and testing.                       |
+| `terraform/`      | Infrastructure as Code using Terraform for AWS, GCP, and on-prem setups. |
 
-Directory: [encryption_key/](./encryption_key)
+---
 
-Provides scripts and configuration files related to encryption key management. Emphasizes security best practices for handling sensitive data and encryption keys.
+## 🪲 Debugging Lab
 
-## Helm
+**Directory:** `debugging_lab/`
 
-Directory: [helm/](./helm)
+Focuses on **troubleshooting and debugging** common issues in Kubernetes and cloud environments:
 
-Helm is a package manager for Kubernetes. This section includes Helm charts and templates for managing complex Kubernetes applications, enabling easier deployment and version control.
+* `insufficient_resources/` – Diagnosing CPU/memory resource constraints.
+* `pod_dependencies/` – Resolving inter-pod dependency issues.
+* `pod_network/` – Fixing networking and DNS resolution problems.
+* Includes a dedicated `README.md` with troubleshooting guides and lab instructions.
 
-## Jenkins
+---
 
-Directory: [jenkins/](./jenkins)
+## 🎓 DevOps Program
 
-Jenkins is a widely-used automation server for CI/CD pipelines. This section contains pipeline scripts and configurations demonstrating how to set up automated build, test, and deployment pipelines.
+**Directory:** `devops_program/`
 
-## Kubernetes (K8s)
+A structured, lesson-based curriculum covering the full DevOps stack:
 
-Directory: [k8s/](./k8s)
+| Module              | Directory                                | Topics |
+| ------------------- | ---------------------------------------- | ------ |
+| `l_1_4_python`      | Python basics for DevOps scripting       |        |
+| `l_5_jenkins`       | Jenkins pipelines and automation         |        |
+| `l_6_7_git`         | Git, GitHub, and branching strategies    |        |
+| `l_8_linux`         | Linux system fundamentals                |        |
+| `l_9_docker`        | Docker and containerization              |        |
+| `l_10_11_k8s_helm`  | Kubernetes & Helm deployments            |        |
+| `l_12_ansible`      | Ansible configuration management         |        |
+| `l_13_monitoring`   | Monitoring with Prometheus & Grafana     |        |
+| `l_14_15_terraform` | Infrastructure automation with Terraform |        |
 
-This section includes Kubernetes manifests and configuration files for deploying applications in a Kubernetes cluster. It covers topics such as deployments, services, ConfigMaps, and secrets.
+---
 
-## Monitoring (Minikube Project)
+## 🔐 Encryption Key Management
 
-Directory: [monitoring/minikube_monitoring_project/](./monitoring/minikube_monitoring_project)
+**Directory:** `encryption_key/`
 
-Contains a project demonstrating how to set up monitoring solutions on a local Kubernetes cluster using Minikube. Includes tools such as Prometheus and Grafana for observability.
+Includes secure management utilities for handling **encryption keys**:
 
-## Terraform
+* `git-crypt-key/` – Used for managing secrets within Git repositories using `git-crypt`.
 
-Directory: [terraform/](./terraform)
+---
 
-Terraform is an infrastructure as code tool that allows you to define and provision infrastructure using code. This section includes Terraform scripts for various infrastructure setups, emphasizing reproducibility and scalability.
+## 🚀 Getting Started
 
-## Getting Started
-
-To get started with this repository:
-
-1. **Clone the repository**:
+1. **Clone the repository:**
 
    ```bash
    git clone https://github.com/EduardUsatchev/DevOps.git
    ```
 
-2. **Navigate to a specific directory**:
+2. **Navigate to a section:**
 
    ```bash
    cd DevOps/<directory_name>
    ```
 
-3. **Follow the instructions** in the respective subdirectory's `README.md` or documentation files.
+3. **Follow the specific README or documentation** in each directory for setup and execution instructions.
 
-## Prerequisites
+---
 
-Ensure you have the following tools installed before working with the projects in this repository:
+## 🧰 Prerequisites
 
-- **Git**: For version control.
-- **Docker**: For containerization.
-- **Kubernetes**: For orchestration (use Minikube for local development).
-- **Ansible**: For configuration management.
-- **Terraform**: For infrastructure as code.
-- **Helm**: For Kubernetes package management.
-- **Jenkins**: For setting up CI/CD pipelines.
-- **Argo CD**: For GitOps continuous delivery.
+Before working with this repository, ensure the following tools are installed:
 
-## Contributing
+| Tool                      | Purpose                       |
+| ------------------------- | ----------------------------- |
+| **Git**                   | Version control               |
+| **Docker**                | Containerization              |
+| **Kubernetes / Minikube** | Orchestration                 |
+| **Ansible**               | Configuration management      |
+| **Terraform**             | Infrastructure as Code        |
+| **Helm**                  | Kubernetes package management |
+| **Jenkins**               | CI/CD automation              |
+| **Argo CD**               | GitOps continuous delivery    |
 
-Contributions are welcome! If you have improvements or suggestions, please fork the repository, create a new branch, and submit a pull request. Ensure that your contributions align with the repository's purpose and maintain consistency with the existing content.
+---
 
-## License
+## 🤝 Contributing
 
-This repository is licensed under the [MIT License](LICENSE). You are free to use, modify, and distribute the code, provided proper attribution is given.
+Contributions are welcome!
+To contribute:
 
+1. Fork the repository.
+2. Create a feature branch.
+3. Commit your changes with clear messages.
+4. Submit a pull request.
+
+Make sure your additions maintain the repository’s structure and purpose.
+
+---
+
+## 📄 License
+
+This repository is licensed under the **MIT License**.
+You are free to use, modify, and distribute the content, provided proper attribution is given.
+
+---
+
+Would you like me to:
+
+* ✅ Add **badges** (GitHub stars, CI status, license, etc.) at the top,
+* 🧭 Add **links** to each subfolder (like `[content/docker](content/docker/)`), or
+* 🎨 Add a **visual tree diagram** of the folder structure for the README?
+
+These can make your README much more professional and navigable.

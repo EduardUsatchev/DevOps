@@ -1,33 +1,84 @@
-.idea/**
-jenkins/jenkins_deploy/jenkins_home**
-../../.DS_Store
-../
-../../docker/.DS_Store
-../../docker/entrypoint_dockerfile/db_data/
-../../docker/entrypoint_dockerfile/logs/
-../../docker/flask_docker_build/.DS_Store
-../../docker/logs_dockerfile/logs/
-../../docker/storage_dockerfile/data/
-../../jenkins/jenkins_deploy/agent.jar
-../../terraform/terraform_example/.terraform/
-devops_program/l_14_15_terraform/lesson_14/tf-demo/ex2/dev/my-new-service-terru/.terragrunt-cache/*
-.terraform/
-.terragrunt-cache/
-docker/entrypoint_dockerfile/db_data/*
+# -----------------------------
+# OS & Editor cruft
+# -----------------------------
 .DS_Store
-# Ignore all .terraform directories
+**/.DS_Store
+.idea/
+.vscode/
+
+# -----------------------------
+# Python
+# -----------------------------
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.python-version
+.venv/
+venv/
+.env
+.env.*
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# -----------------------------
+# Logs & temp
+# -----------------------------
+*.log
+**/logs/*.log
+generate_docs_async.log
+
+# -----------------------------
+# Docker (project examples)
+# -----------------------------
+# Ephemeral data & logs in example images
+docker/entrypoint_dockerfile/db_data/*
+docker/**/logs/
+# Keep sample data files (e.g., docker/my_docker/data/1.txt) by default
+
+# -----------------------------
+# Jenkins
+# -----------------------------
+# Agent binary and local homes
+**/jenkins/agent.jar
+jenkins/**/agent.jar
+jenkins/jenkins_deploy/jenkins_home*/
+**/jenkins_home*/
+
+# -----------------------------
+# Helm
+# -----------------------------
+# Chart packages created during packaging/publish
+**/*.tgz
+# (keeps your committed chart tars if already tracked, but ignores new ones)
+
+# -----------------------------
+# Terraform & Terragrunt
+# -----------------------------
+# Tool working directories
 **/.terraform/
+.terraform/
+**/.terragrunt-cache/
+.terragrunt-cache/
 
-# Ignore Terraform state files
+# State & plan files
 *.tfstate
-*.tfstate.backup
-
-# Ignore Terraform plan files
+*.tfstate.*
 *.tfplan
 
-# Ignore sensitive variable files
+# Variable files (often contain secrets)
 *.tfvars
 *.tfvars.json
 
-# Ignore provider cache
+# Provider lockfile (ignore if you don’t want it tracked)
 .terraform.lock.hcl
+
+# -----------------------------
+# Zip artifacts (selective)
+# -----------------------------
+# Don’t blanket-ignore *.zip to keep committed examples like:
+#   aws/class-lab/function.zip
+#   aws/cloudwatch/monitoring_aws_lab.zip
+# Add specific patterns here if you start generating zips you don’t want tracked.
