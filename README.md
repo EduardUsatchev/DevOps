@@ -144,26 +144,6 @@ cd terraform/terraform_example/environments/dev
 
 ---
 
-## 🧰 Troubleshooting Tips
-
-* **K8s resources not appearing?** Check namespace and context:
-  `kubectl config get-contexts && kubectl get ns`
-* **Jenkins plugins/agents fail?** Inspect logs:
-  `docker logs <jenkins-container>` and `jenkins/jenkins_deploy/plugins.txt`
-* **Terraform state issues?** Verify backend credentials and S3/DynamoDB configuration in `backend.tf`.
-* **Minikube image not found?** Use the env:
-  `eval $(minikube docker-env)` before building.
-
----
-
-## 🤝 Contributing
-
-1. Branch from `main`, follow folder conventions.
-2. Add or update module-level README if you contribute labs.
-3. Keep examples minimal but production-inspired.
-4. Prefer parameterized scripts and `.example` templates for env-specific values.
-
----
 
 ## 📜 License
 
