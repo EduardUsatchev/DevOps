@@ -163,11 +163,3 @@ Educational use.
 * `terraform/README.md` — Terraform & Terragrunt multi-env setup
 
 ---
-
-> 🧩 **Author’s Note:**
-> This monorepo is intentionally **modular**: you can clone only a section for a class, or run it end-to-end as a full DevOps bootcamp.
-
-```
-
-Want me to drop in a **Mermaid “map” diagram** that shows how the modules connect (Linux → Git → Docker → K8s → CI/CD → GitOps → Monitoring → IaC)?
-```
