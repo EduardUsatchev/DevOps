@@ -58,44 +58,49 @@ def lambda_handler(event, context):
             'body': 'Failed to retrieve the secret.'
         }
 --------------------------------------------
-import boto3
+import os
 import json
+import boto3
+from decimal import Decimal
 
-# Create a DynamoDB client
-dynamodb = boto3.client('dynamodb')
+TABLE_NAME = os.environ.get("TABLE_NAME", "students")
+REGION = os.environ.get("AWS_REGION", "us-east-2")
+
+dynamodb = boto3.resource("dynamodb", region_name=REGION)
+table = dynamodb.Table(TABLE_NAME)
+
+class DecimalEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, Decimal):
+            # Convert Decimals to float or int as appropriate
+            return float(o) if (o % 1) else int(o)
+        return super().default(o)
 
 def lambda_handler(event, context):
-    # Scan the DynamoDB table "students"
     try:
-        response = dynamodb.scan(
-            TableName='students'  # Table name is 'students'
-        )
-        
-        # Get the items from the response
-        items = response.get('Items', [])
-        
-        # Check if there are items and print them
-        if items:
-            print("Items in the 'students' table:")
-            for item in items:
-                print(json.dumps(item, indent=4))
-        else:
-            print("No items found in the 'students' table.")
-            
+        items = []
+        scan_kwargs = {}
+        while True:
+            resp = table.scan(**scan_kwargs)
+            items.extend(resp.get("Items", []))
+            lek = resp.get("LastEvaluatedKey")
+            if not lek:
+                break
+            scan_kwargs["ExclusiveStartKey"] = lek
+
         return {
-            'statusCode': 200,
-            'body': json.dumps({
-                'message': 'Successfully fetched items from DynamoDB.',
-                'items': items
-            })
+            "statusCode": 200,
+            "body": json.dumps(
+                {"message": f"Fetched {len(items)} items from DynamoDB.", "items": items},
+                cls=DecimalEncoder
+            ),
+            "headers": {"Content-Type": "application/json"}
         }
 
     except Exception as e:
-        print(f"Error fetching data from DynamoDB: {str(e)}")
+        # Helpful logging for IAM/region issues
+        print(f"[ERROR] {e}")
         return {
-            'statusCode': 500,
-            'body': json.dumps({
-                'message': 'Error fetching data from DynamoDB',
-                'error': str(e)
-            })
+            "statusCode": 500,
+            "body": json.dumps({"message": "Error fetching data from DynamoDB", "error": str(e)})
         }
