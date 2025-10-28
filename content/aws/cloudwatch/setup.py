@@ -66,7 +66,7 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
   name = "lab-sqs-queue"
 }
 """,
-        'lambda.tf': """# Producer Lambda (triggered by S3, logs & pushes to SQS)
+        'lambda.tf.back': """# Producer Lambda (triggered by S3, logs & pushes to SQS)
 resource "aws_lambda_function" "producer" {
   function_name    = "lab_lambda_producer"
   filename         = "lambda_producer.zip"

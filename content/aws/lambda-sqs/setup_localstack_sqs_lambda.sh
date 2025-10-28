@@ -76,7 +76,7 @@ echo "6) Zipping Lambda code..."
 zip lambda_package.zip app.py > /dev/null
 
 echo "7) Creating main.tf (Terraform config)..."
-cat << 'EOF' > main.tf
+cat << 'EOF' > main.tf.back
 terraform {
   required_providers {
     aws = {
