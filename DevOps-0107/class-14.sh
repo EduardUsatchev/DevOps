@@ -12,7 +12,7 @@ ssh-copy-id node2
 mkdir /etc/ansible
 cp hosts /etc/ansible/hosts
 ansible servers -m ping
-
+ansible servers -m apt -a "name=nginx state=present" -i hosts
 ssh node1
 userdel avielb
 exit
